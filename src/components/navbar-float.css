@@ -1,0 +1,6 @@
+/* Home jaisa floating navbar, baaki pages (Donate, About...) par bhi.
+   Home par navbar hero ke upar overlay hota hai, baaki pages par sticky rehta hai. */
+.navbar.home-navbar.is-sub {
+  position: sticky;
+  inset: 0 0 auto;
+}
