@@ -57,7 +57,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.12; }
 
 .hero { position: relative; display: grid; min-height: max(720px, 100svh); place-items: center; overflow: hidden; padding: 130px 18px 48px; color: var(--cream); background: #6b371f; }
 .hero::after { position: absolute; inset: 0; z-index: 1; background: rgba(47, 26, 16, .12); content: ''; pointer-events: none; }
-.hero-backdrop { position: absolute; inset: 0; z-index: 0; background-image: url('./images/hero.png'); background-position: center; background-size: cover; }
+.hero-backdrop { position: absolute; inset: 0; z-index: 0; background-image: url('/images/hero.webp'); background-position: center; background-size: cover; }
 .hero-card { position: relative; z-index: 2; width: min(530px, 100%); padding: 30px 34px 34px; border-radius: 24px; color: var(--ink); background: linear-gradient(135deg, #f9f4d5 0%, #edf7d9 100%); box-shadow: 0 20px 60px rgba(48, 26, 14, .22); text-align: center; animation: arrive .7s ease both; }
 .hero-card-mark { width: 36px; height: 36px; margin: 0 auto 8px; color: #768745; }
 .hero-card .eyebrow { color: #806747; font-size: 11px; }

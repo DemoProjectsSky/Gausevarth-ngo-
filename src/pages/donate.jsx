@@ -3,21 +3,15 @@ import { Link } from 'react-router-dom'
 import {
   ArrowLeft, Check, Copy, Download, Heart, Landmark, ScanLine, ShieldCheck, Smartphone,
 } from 'lucide-react'
+import { BANK, upiLink } from '../content/bank'
 import './gs-donate.css'
 
 /* QR image ka path (public/images/ ke andar) */
 const QR_IMAGE = encodeURI('/images/gausevath ngo qr.jpeg')
 
-const BANK = {
-  name: 'GAUSEVARATHA SWAYAM SEVAK CHARITABLE FOUNDATION',
-  bank: 'UCO Bank',
-  account: '08810210003183',
-  ifsc: 'UCBA0000881',
-  upi: 'gauseva3183@ucobank',
-}
 
 // Mobile pe seedha UPI app kholne ke liye
-const UPI_LINK = `upi://pay?pa=${BANK.upi}&pn=${encodeURIComponent(BANK.name)}&cu=INR`
+const UPI_LINK = upiLink()
 
 // Header mein upar tairte hue dil
 const HEARTS = [
@@ -101,7 +95,7 @@ export default function Donate() {
               <a className="gd-btn gd-btn-solid" href={UPI_LINK}><Smartphone size={18} /> Pay with UPI app</a>
               <a className="gd-btn gd-btn-line" href={QR_IMAGE} download="gausevarth-donate-qr.jpeg"><Download size={18} /> Download QR</a>
             </div>
-            <small>"Pay with UPI app" button phone par kaam karta hai. Computer par QR scan karo.</small>
+            <small>The "Pay with UPI app" button works on phones. On a computer, scan the QR code with your phone.</small>
           </section>
 
           {/* Bank details */}
@@ -116,17 +110,17 @@ export default function Donate() {
         </div>
 
         <ol className="gd-steps">
-          <li className="gd-rise" style={{ '--d': '700ms' }}><span>1</span><div><b>Scan the QR</b><small>Koi bhi UPI app kholo aur QR scan karo.</small></div></li>
-          <li className="gd-rise" style={{ '--d': '850ms' }}><span>2</span><div><b>Enter amount</b><small>Jitna chaho utna daalo, aur pay karo.</small></div></li>
-          <li className="gd-rise" style={{ '--d': '1000ms' }}><span>3</span><div><b>Done</b><small>Aapka daan gaayon ki seva mein lagega.</small></div></li>
+          <li className="gd-rise" style={{ '--d': '700ms' }}><span>1</span><div><b>Scan the QR</b><small>Open any UPI app and scan the QR code.</small></div></li>
+          <li className="gd-rise" style={{ '--d': '850ms' }}><span>2</span><div><b>Enter amount</b><small>Enter any amount you like and pay.</small></div></li>
+          <li className="gd-rise" style={{ '--d': '1000ms' }}><span>3</span><div><b>Done</b><small>Your gift goes straight to the care of the cows.</small></div></li>
         </ol>
 
         <p className="gd-fine gd-rise" style={{ '--d': '1100ms' }}>
           <ShieldCheck size={18} />
           <span>
-            Payment karne se pehle QR scan ke baad app mein naam
+            After scanning, please check that your app shows the name
             <b> {BANK.name} </b>
-            zaroor check kar lo. Donations are voluntary. No tax-exemption (such as 80G) is implied unless the Foundation confirms it.
+            before you pay. Donations are voluntary. No tax-exemption (such as 80G) is implied unless the Foundation confirms it.
           </span>
         </p>
 

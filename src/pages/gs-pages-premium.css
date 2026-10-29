@@ -1,0 +1,140 @@
+/* ==========================================================
+   Premium layer for  "What We Do"  and  "Gallery"
+   Import this AFTER gs-pages.css. Every rule is scoped to
+   section classes that only these two pages use, so Campaigns,
+   Contact, Privacy etc. are NOT affected.
+
+   Hero (all inner pages) same as About: dark brown, pill + title
+   What We Do   hero dark brown
+                Four ways      ivory  (each row its own tint)
+                A typical day  deep emerald + champagne
+                Our promise    blush rose + wine
+                Closing CTA    deep wine + gold
+   Gallery      hero dark brown
+                Photos         deep plum + rose gold
+                Closing CTA    midnight plum + rose gold
+   ========================================================== */
+
+/* ---------- hero: same look as the About page / reference screenshot ----------
+   solid dark brown band, a small page-name pill, one title, straight bottom edge.
+   (applies to every inner-page hero; to limit it to some pages, prefix the
+   selectors with  .gp-hero:has(~ .gp-work)  etc.)                              */
+.gp .gp-hero {
+  background: #3a1b0e;
+  padding: 128px 0 clamp(60px, 7vw, 90px);
+}
+.gp .gp-hero .gp-wave { display: none; }
+.gp .gp-hero-inner { gap: 0; }
+
+/* pill shows only the current page name, e.g. "What We Do" */
+.gp .gp-crumbs { padding: 14px 30px; border-radius: 10px; background: rgba(255, 243, 220, .16); backdrop-filter: none; }
+.gp .gp-crumbs a, .gp .gp-crumbs > span { display: none; }
+.gp .gp-crumbs b { color: #fff3dc; font-weight: 500; }
+
+/* one medium title, no extra text under it */
+.gp .gp-hero h1 {
+  margin-top: clamp(30px, 4.5vw, 52px);
+  font-size: clamp(34px, 5.4vw, 70px);
+  font-weight: 700; letter-spacing: -.02em; line-height: 1.1; text-shadow: none;
+}
+.gp .gp-hero .gp-squig,
+.gp .gp-hero .gp-lead,
+.gp .gp-hero .gp-hero-cta { display: none; }
+
+/* ---------- text animation helpers ---------- */
+/* paragraphs: sharpen out of a soft blur */
+.gp [data-anim="blur"] {
+  opacity: 0; transform: translateY(14px); filter: blur(9px);
+  transition: opacity 1s ease var(--d, 0ms), transform 1s cubic-bezier(.2, .7, .2, 1) var(--d, 0ms), filter 1s ease var(--d, 0ms);
+}
+.gp [data-anim="blur"].in { opacity: 1; transform: none; filter: none; }
+
+@keyframes gpRise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes gpSlideIn { from { opacity: 0; transform: translateX(-18px); } to { opacity: 1; transform: none; } }
+
+/* ============ WHAT WE DO · four ways we care — ivory ============ */
+.gp .gp-work { --paper-ink: #2a1a10; --c3: #b8863b; background: #fbf3e4; }
+
+.gp .gp-row {
+  --rc: #e9c87a;
+  position: relative;
+  padding: clamp(22px, 3.4vw, 44px);
+  border-radius: 36px;
+  background: color-mix(in srgb, var(--rc) 26%, #fffaf0);
+  border: 1.5px solid color-mix(in srgb, var(--rc) 60%, transparent);
+}
+.gp .gp-row-water   { --rc: #9cc9b8; }   /* sage teal  */
+.gp .gp-row-medical { --rc: #e7a9a0; }   /* rose       */
+.gp .gp-row-shelter { --rc: #d8b08a; }   /* clay       */
+.gp .gp-row-no { -webkit-text-stroke-color: color-mix(in srgb, var(--rc) 55%, #2a1a10); }
+
+/* the text block builds itself line by line (starts once the block scrolls in) */
+.gp-row-body > * { opacity: 0; }
+.gp-row-body.in > * { animation: gpRise .85s cubic-bezier(.2, .8, .2, 1) both; }
+.gp-row-body.in > :nth-child(1) { animation-delay: .10s; }
+.gp-row-body.in > :nth-child(2) { animation-delay: .24s; }
+.gp-row-body.in > :nth-child(3) { animation-delay: .38s; }
+.gp-row-body.in > :nth-child(4) { animation-delay: .52s; }
+.gp-row-body.in > :nth-child(5) { animation-delay: .90s; }
+.gp-row-body li { opacity: 0; }
+.gp-row-body.in li { animation: gpSlideIn .6s cubic-bezier(.2, .8, .2, 1) both; }
+.gp-row-body.in li:nth-child(1) { animation-delay: .65s; }
+.gp-row-body.in li:nth-child(2) { animation-delay: .76s; }
+.gp-row-body.in li:nth-child(3) { animation-delay: .87s; }
+
+/* ============ WHAT WE DO · a typical day — deep emerald + champagne ============ */
+.gp .gp-day {
+  --c1: #0f3d33; --c2: #e9c87a; --hero-ink: #fdf6e3;
+  background-color: #0f3d33;
+  background-image:
+    radial-gradient(circle at 92% 0%, rgba(233, 200, 122, .16), transparent 40%),
+    radial-gradient(circle at 0% 100%, rgba(47, 122, 100, .5), transparent 46%);
+}
+.gp .gp-day-track li:nth-child(1) { --k-bg: #e9c87a; }
+.gp .gp-day-track li:nth-child(2) { --k-bg: #f3dfa8; }
+.gp .gp-day-track li:nth-child(3) { --k-bg: #9fd8c3; }
+.gp .gp-day-track li:nth-child(4) { --k-bg: #d9a85c; }
+.gp .gp-day-track li:nth-child(5) { --k-bg: #7fbfa9; }
+/* the dotted line draws itself left to right */
+.gp-day-track::before { transform: scaleX(0); transform-origin: left center; transition: transform 1.8s cubic-bezier(.2, .7, .2, 1) .2s; }
+.gp-day-track:has(li.in)::before { transform: scaleX(1); }
+
+/* ============ WHAT WE DO · our promise — blush rose + wine ============ */
+.gp .gp-values { --paper-ink: #3b0f1d; background: #f8e7e2; }
+.gp .gp-values .gs-kicker { color: #8c2543; }
+.gp .gp-tile { color: #2b1018; box-shadow: 0 10px 0 rgba(140, 37, 67, .22); }
+.gp .gp-tile:nth-child(1) { color: #fff4f1; }
+
+/* ============ WHAT WE DO · closing band — deep wine + gold ============ */
+.gp-values ~ .gp-cta {
+  background:
+    radial-gradient(60vmax 30vmax at 50% 120%, rgba(246, 169, 53, .32), transparent 70%),
+    #3b0f1d;
+}
+
+/* ============ GALLERY · photos — deep plum + rose gold ============ */
+.gp .gp-gallery {
+  --c2: #e8b4a0; --peach: #e8b4a0; --lilac: #b98ad0;
+  --paper-ink: #fbeee6;
+  color: #fbeee6;
+  background-color: #2a1a3a;
+  background-image:
+    radial-gradient(circle at 10% 0%, rgba(232, 180, 160, .16), transparent 40%),
+    radial-gradient(circle at 100% 100%, rgba(107, 63, 122, .5), transparent 46%);
+}
+.gp .gp-lightbox { --c2: #e8b4a0; }
+
+/* gallery CTA — midnight plum + rose gold */
+.gp-gallery ~ .gp-cta {
+  background:
+    radial-gradient(60vmax 30vmax at 50% 120%, rgba(232, 180, 160, .32), transparent 70%),
+    #1d1129;
+}
+.gp-gallery ~ .gp-cta .gs-btn-sun { background: #e8b4a0; }
+
+/* ---------- reduced motion: show everything, no movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .gp [data-anim="blur"] { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .gp-row-body > *, .gp-row-body li { opacity: 1 !important; transform: none !important; }
+  .gp-day-track::before { transform: none !important; }
+}

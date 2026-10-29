@@ -5,11 +5,11 @@ import {
   Play, Stethoscope, Wheat, Warehouse,
 } from 'lucide-react'
 import { foundationContent } from '../content/foundationContent'
+import { Flower, Leaf, Spark } from '../components/Shared'
 import './gs-update.css'
 import './gs-donate.css'
 
 const LOGO = '/images/gausevarth.logo.jpeg'
-const DONATE_QR = '/images/donate-qr.png'
 
 /* ==========================================================
    ABOUT VIDEO — yahan apni video set karo
@@ -83,13 +83,16 @@ function CountUp({ to, from, duration = 1400 }) {
   const ok = Number.isFinite(target)
   const start = Number.isFinite(from) ? from : Math.max(0, target - 24)
   const ref = useRef(null)
-  const [val, setVal] = useState(ok ? target : 0)
+  const [val, setVal] = useState(() => {
+    if (!ok) return 0
+    const still = typeof window === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    return still ? target : start
+  })
 
   useEffect(() => {
     if (!ok) return undefined
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce || !('IntersectionObserver' in window)) return undefined
-    setVal(start)
     let raf = 0
     const io = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting) return
@@ -183,6 +186,14 @@ const herd = [
   { cls: 'arch', ar: .7, cx: .73, cy: .57, f: .17, cap: 'Fresh milk, fresh blessings' },
   { cls: 'wide', ar: 1.6, cx: .9, cy: .82, f: .26, cap: 'Nap time' },
   { cls: 'tall', ar: .62, cx: .09, cy: .85, f: .22, cap: 'Fodder for the day' },
+]
+
+const explore = [
+  { to: '/our-work', title: 'What we do', text: 'Fodder, water, medical care and shelter, every day.', image: '/images/gallery-07.jpg', color: '#f6a935', cls: 'big' },
+  { to: '/campaigns', title: 'Campaigns', text: 'Give with a purpose.', image: '/images/gallery-06.jpg', color: '#ff6b8f' },
+  { to: '/gallery', title: 'Gallery', text: 'Meet the herd.', image: '/images/gallery-04.jpg', color: '#c9a7ff' },
+  { to: '/get-involved', title: 'Get involved', text: 'Many hands, one herd.', image: '/images/gallery-03.jpg', color: '#8ec5ff' },
+  { to: '/contact', title: 'Contact', text: 'Come say hello.', image: '/images/gallery-01.jpg', color: '#7ee0c3' },
 ]
 
 const uses = [
@@ -365,6 +376,10 @@ export default function Home() {
       <section id="top" className="gs-hero" data-prog aria-labelledby="hero-title">
         <div className="gs-hero-bg" aria-hidden="true" />
         <div className="gs-hero-shade" aria-hidden="true" />
+        <div className="gp-floaters gs-hero-floaters" aria-hidden="true">
+          <Flower className="f f1" /><Leaf className="f f2" /><Spark className="f f3" /><Heart className="f f4" fill="currentColor" />
+          <Spark className="f f5" /><Leaf className="f f6" /><Flower className="f f7" />
+        </div>
         <div className="gs-hero-inner">
           <h1 id="hero-title" className="gs-hero-title">
             <Split text="Happy cows," />
@@ -437,6 +452,7 @@ export default function Home() {
           <span className="gs-kicker" data-anim="up">What we stand for</span>
           <h2 id="pillars-title"><Split text="Three words, one promise." /></h2>
         </header>
+        <p className="gs-pillars-more" data-anim="up"><Link to="/our-work" className="gs-link">See everything we do <ArrowUpRight size={18} /></Link></p>
         <div className="gs-stack">
           {pillars.map((p, i) => (
             <article key={p.key} className={`gs-pillar gs-pillar-${p.key}`} style={{ '--i': i }}>
@@ -468,7 +484,7 @@ export default function Home() {
                 <figcaption>{h.cap}</figcaption>
               </figure>
             ))}
-            <div className="gs-herd-end"><span>Want to see more?</span><Link to="/donate" className="gs-btn gs-btn-lilac" data-magnet>Support them <Heart size={16} fill="currentColor" /></Link></div>
+            <div className="gs-herd-end"><span>Want to see more?</span><Link to="/gallery" className="gs-btn gs-btn-lilac" data-magnet>Full gallery <ArrowUpRight size={16} /></Link></div>
           </div>
           <div className="gs-herd-meter" aria-hidden="true"><i /></div>
         </div>
@@ -487,6 +503,26 @@ export default function Home() {
               <div><img src={f.image} alt={f.imageAlt} loading="lazy" /></div>
               <figcaption><b>{f.name || 'Founder'}</b><span>{f.role}</span></figcaption>
             </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* 5b ─ EXPLORE · quick links to every page */}
+      <section className="gs-explore" aria-labelledby="explore-title">
+        <header className="gs-explore-head">
+          <span className="gs-kicker" data-anim="up">Explore</span>
+          <h2 id="explore-title"><Split text="There is more to see." /></h2>
+        </header>
+        <div className="gs-explore-grid">
+          {explore.map((e, i) => (
+            <Link key={e.to} to={e.to} className={`gs-tile ${e.cls || ''}`} data-anim="up" style={{ '--d': `${i * 90}ms`, '--tc': e.color }}>
+              <img src={e.image} alt="" loading="lazy" />
+              <span className="gs-tile-label">
+                <b>{e.title}</b>
+                <small>{e.text}</small>
+                <i><ArrowUpRight size={20} /></i>
+              </span>
+            </Link>
           ))}
         </div>
       </section>

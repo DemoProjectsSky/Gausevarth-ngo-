@@ -55,9 +55,11 @@ export const foundationContent = {
   approvedPhotos: [],
   documents: [],
   leadership: [],
+  // Fill these in and the Contact page, footer and forms switch on automatically.
   contact: {
-    email: '',
-    phone: '',
+    email: '',      // e.g. 'info@yourdomain.org'
+    phone: '',      // e.g. '+919876543210'
+    whatsapp: '',   // digits with country code, e.g. '919876543210'
     publicAddress: '',
   },
 }

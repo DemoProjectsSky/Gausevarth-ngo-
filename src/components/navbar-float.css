@@ -4,3 +4,11 @@
   position: sticky;
   inset: 0 0 auto;
 }
+/* Keep the bar the same height while scrolling on inner pages, so content never jumps. */
+.navbar.home-navbar.is-sub.is-compact .nav-inner { min-height: 96px; }
+.navbar.home-navbar.is-sub.is-compact .brand img { width: 72px; height: 72px; }
+
+/* Nav has 7 links + Donate now: tighten spacing so it fits on laptops. */
+.nav-links { gap: 4px; }
+.nav-link { padding: 10px 11px; font-size: 13.5px; }
+@media (min-width: 1500px) { .nav-links { gap: 10px; } .nav-link { padding: 10px 13px; font-size: 14px; } }

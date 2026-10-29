@@ -5,11 +5,12 @@ import './navbar-float.css'
 
 const links = [
   { to: '/', label: 'Home', hash: '' },
-  { to: '/about', label: 'About Us', hash: '' },
-  { to: '/#initiatives', label: 'What We Do', hash: '#initiatives' },
-  { to: '/#gallery', label: 'Gallery', hash: '#gallery' },
-  { to: '/#founders', label: 'Founders', hash: '#founders' },
-  { to: '/#contact', label: 'Contact', hash: '#contact' },
+  { to: '/about', label: 'About', hash: '' },
+  { to: '/our-work', label: 'What We Do', hash: '' },
+  { to: '/campaigns', label: 'Campaigns', hash: '' },
+  { to: '/gallery', label: 'Gallery', hash: '' },
+  { to: '/get-involved', label: 'Get Involved', hash: '' },
+  { to: '/contact', label: 'Contact', hash: '' },
 ]
 
 export default function Navbar() {

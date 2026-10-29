@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   ArrowUpRight, Check, CheckCircle2, Droplets, Eye, Heart, HeartHandshake, Landmark,
@@ -6,8 +6,6 @@ import {
 } from 'lucide-react'
 import { foundationContent } from '../content/foundationContent'
 import './about-page.css'
-
-const LOGO = '/images/gausevarth.logo.jpeg'
 
 /* ==========================================================
    PHOTOS — yahan apni images ke address daalo
@@ -54,6 +52,27 @@ const missionCards = [
 ]
 
 const valueIcons = [ShieldCheck, HeartHandshake, CheckCircle2, UsersRound]
+
+/* ---------- animated heading: every word rises out of a mask ----------
+   parts = [{ t: 'plain words' }, { t: 'accent words', em: true }, ...]   */
+function Split({ as: Tag = 'h2', parts, delay = '100ms', ...rest }) {
+  let n = 0
+  return (
+    <Tag {...rest} data-r="words" style={{ '--d': delay }}>
+      {parts.map((p, pi) => {
+        const nodes = p.t.split(' ').map(word => {
+          const i = n++
+          return (
+            <Fragment key={i}>
+              <span className="ab-w"><span style={{ '--i': i }}>{word}</span></span>{' '}
+            </Fragment>
+          )
+        })
+        return p.em ? <em key={pi}>{nodes}</em> : <Fragment key={pi}>{nodes}</Fragment>
+      })}
+    </Tag>
+  )
+}
 
 /* ---------- little doodles ---------- */
 
@@ -105,12 +124,10 @@ function Blob({ src, alt, shape = 1, back, className = '', caption, style }) {
 export default function AboutUs() {
   const root = useRef(null)
   const {
-    officialName, incorporatedOn, incorporationYear, organisationType, governingLaw, cin,
+    officialName, incorporatedOn, organisationType, governingLaw, cin,
     section8LicenceNumber, registeredRecordLocation, legalClarification,
     missionStatement, visionStatement, values, milestones, founders,
   } = foundationContent
-
-  const place = registeredRecordLocation.replace(' - ', ', ')
 
   // reveal on scroll + parallax
   useEffect(() => {
@@ -158,88 +175,65 @@ export default function AboutUs() {
 
   return (
     <div className="ab" ref={root}>
-      {/* ───────── 1. HERO ───────── */}
+      {/* ───────── 1. HERO (solid dark brown band, centered) ───────── */}
       <header className="ab-hero" aria-labelledby="ab-title">
-        <Sparkles className="ab-spark" size={26} style={{ left: '7%', top: '30%', '--d': '0s' }} aria-hidden="true" />
-        <Sparkles className="ab-spark" size={18} style={{ left: '46%', top: '16%', '--d': '1.2s' }} aria-hidden="true" />
-        <Sparkles className="ab-spark" size={30} style={{ right: '6%', top: '22%', '--d': '2.1s' }} aria-hidden="true" />
-        <Sparkles className="ab-spark" size={20} style={{ right: '38%', bottom: '24%', '--d': '.7s' }} aria-hidden="true" />
+        <Wheat className="ab-hero-deco ab-deco-left" aria-hidden="true" />
+        <Leaf className="ab-hero-deco ab-deco-right" />
 
-        <div className="ab-wrap">
-          <nav className="ab-crumb" aria-label="Breadcrumb">
-            <Link to="/">Home</Link><span aria-hidden="true">/</span><span aria-current="page">About Us</span>
-          </nav>
+        <Heart className="ab-ghost" size={46} fill="currentColor" style={{ left: '28%', top: '46%' }} aria-hidden="true" />
+        <Sparkles className="ab-ghost" size={40} fill="currentColor" style={{ right: '27%', top: '40%' }} aria-hidden="true" />
+        <Droplets className="ab-ghost" size={44} fill="currentColor" style={{ left: '16%', bottom: '14%' }} aria-hidden="true" />
+        <Heart className="ab-ghost" size={40} fill="currentColor" style={{ right: '12%', bottom: '12%' }} aria-hidden="true" />
 
-          <div className="ab-hero-grid">
-            <div>
-              <span className="ab-kicker">About the Foundation</span>
-              <h1 id="ab-title">
-                <span className="ab-line"><span style={{ '--d': '150ms' }}>Seva.</span></span>
-                <span className="ab-line"><span className="ab-gold" style={{ '--d': '320ms' }}>Sanrakshan.</span></span>
-                <span className="ab-line"><span style={{ '--d': '490ms' }}>Jeev Daya.</span></span>
-              </h1>
-              <p className="ab-hero-lead" data-r style={{ '--d': '700ms' }}>
-                {officialName} is a {organisationType} under the {governingLaw}. We care for cows with three simple promises:
-                service, protection and compassion.
-              </p>
-              <ul className="ab-facts">
-                <li data-r="zoom" style={{ '--d': '850ms' }}><b>{incorporationYear}</b><span>Incorporated</span></li>
-                <li data-r="zoom" style={{ '--d': '960ms' }}><b>{organisationType}</b><span>Type</span></li>
-                <li data-r="zoom" style={{ '--d': '1070ms' }}><b>{place}</b><span>Based in</span></li>
-              </ul>
-            </div>
-
-            <div className="ab-seal" data-r="zoom" style={{ '--d': '300ms' }}>
-              <svg className="ab-seal-ring" viewBox="0 0 200 200" aria-hidden="true">
-                <defs><path id="ab-seal-path" d="M100,100 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0" /></defs>
-                <text><textPath href="#ab-seal-path" textLength="530" lengthAdjust="spacing">GAU SEVARTH · SEVA · SANRAKSHAN · JEEV DAYA · GAU SEVARTH ·</textPath></text>
-              </svg>
-              <div className="ab-orbit" aria-hidden="true"><i /><i /><i /></div>
-              <div className="ab-seal-core"><img src={LOGO} alt={`${officialName} official logo`} /></div>
-            </div>
-          </div>
+        <div className="ab-wrap ab-hero-center">
+          <span className="ab-pill" aria-current="page">About Us</span>
+          <h1 id="ab-title">
+            <span className="ab-line">
+              <span>Seva. Sanrakshan. <span className="ab-accent">Jeev Daya.</span></span>
+            </span>
+          </h1>
         </div>
       </header>
 
-      {/* ───────── 2. OUR VISION ───────── */}
+      {/* ───────── 2. OUR VISION — ivory + antique gold ───────── */}
       <section className="ab-vision ab-paper" aria-labelledby="vision-title">
         <HeartLoop className="ab-doodle ab-d-heart" />
         <Leaf className="ab-doodle ab-d-leaf" />
         <div className="ab-wrap ab-vision-grid">
           <div className="ab-vision-copy">
-            <div className="ab-tag" data-r><span className="ab-tag-ico"><Eye size={24} /></span><b>Our Vision</b></div>
-            <h2 className="ab-h2" id="vision-title" data-r style={{ '--d': '100ms' }}>A safe place and a <em>kinder tomorrow</em> for every cow.</h2>
-            <p data-r style={{ '--d': '200ms' }}>{visionStatement}</p>
-            <p data-r style={{ '--d': '300ms' }}>
+            <div className="ab-tag" data-r="left"><span className="ab-tag-ico"><Eye size={24} /></span><b>Our Vision</b></div>
+            <Split id="vision-title" className="ab-h2" delay="100ms" parts={[{ t: 'A safe place and a' }, { t: 'kinder tomorrow', em: true }, { t: 'for every cow.' }]} />
+            <p data-r="blur" style={{ '--d': '500ms' }}>{visionStatement}</p>
+            <p data-r="blur" style={{ '--d': '700ms' }}>
               At Gau Sevarth we believe care begins with the basics: fresh fodder, clean water, a patch of shade and a hand that is never in a hurry.
             </p>
           </div>
 
           <div className="ab-vision-media" data-r="right" data-par style={{ '--spd': 26 }}>
-            <Blob shape={1} src={IMAGES.vision} alt="A cow resting peacefully" back="var(--ab-gold-soft)" />
+            <Blob shape={1} src={IMAGES.vision} alt="A cow resting peacefully" back="var(--s-accent2)" />
             <Balloon className="ab-balloon" />
           </div>
         </div>
       </section>
 
-      {/* ───────── 3. WHO WE ARE ───────── */}
+      {/* ───────── 3. WHO WE ARE — deep emerald + champagne ───────── */}
       <section className="ab-who" aria-labelledby="who-title">
         <div className="ab-wrap ab-who-grid">
           <div className="ab-who-media" data-r="left">
             <div data-par style={{ '--spd': 18 }}>
-              <Blob className="big" shape={2} src={IMAGES.who} alt="Cows at the Foundation" back="var(--ab-mint)" />
+              <Blob className="big" shape={2} src={IMAGES.who} alt="Cows at the Foundation" back="var(--s-accent2)" />
             </div>
             <div data-par style={{ '--spd': 44 }} className="ab-who-small-wrap">
-              <Blob className="small" shape={3} src={IMAGES.whoSmall} alt="A calf being cared for" back="var(--ab-coral)" caption="Daily care" />
+              <Blob className="small" shape={3} src={IMAGES.whoSmall} alt="A calf being cared for" back="var(--s-accent)" caption="Daily care" />
             </div>
           </div>
 
           <div className="ab-who-copy">
-            <div className="ab-tag" data-r><span className="ab-tag-ico"><Heart size={24} fill="currentColor" /></span><b>Who We Are</b></div>
-            <h2 className="ab-h2" id="who-title" data-r style={{ '--d': '100ms' }}>We are Gau Sevarth, <em>a family</em> for the herd.</h2>
+            <div className="ab-tag" data-r="left"><span className="ab-tag-ico"><Heart size={24} fill="currentColor" /></span><b>Who We Are</b></div>
+            <Split id="who-title" className="ab-h2" delay="100ms" parts={[{ t: 'We are Gau Sevarth,' }, { t: 'a family', em: true }, { t: 'for the herd.' }]} />
             <ul className="ab-checks">
               {whoItems.map((item, i) => (
-                <li key={item.title} data-r style={{ '--d': `${200 + i * 140}ms` }}>
+                <li key={item.title} data-r="blur" style={{ '--d': `${400 + i * 170}ms` }}>
                   <span className="ab-check-ico"><Check size={22} strokeWidth={3} /></span>
                   <div>
                     <h3>{item.title}</h3>
@@ -252,18 +246,18 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ───────── 4. OUR MISSION ───────── */}
-      <section className="ab-mission" aria-labelledby="mission-title">
+      {/* ───────── 4. OUR MISSION — blush rose + wine ───────── */}
+      <section className="ab-mission ab-paper" aria-labelledby="mission-title">
         <Leaf className="ab-doodle ab-m-leaf" />
         <HeartLoop className="ab-doodle ab-m-heart" />
         <div className="ab-wrap">
-          <div className="ab-tag" data-r><span className="ab-tag-ico"><HeartHandshake size={24} /></span><b>Our Mission</b></div>
-          <h2 className="ab-h2" id="mission-title" data-r style={{ '--d': '100ms' }}>Guided by <em>seva</em>, every single day.</h2>
-          <p className="ab-mission-text" data-r style={{ '--d': '200ms' }}>{missionStatement}</p>
+          <div className="ab-tag" data-r="left"><span className="ab-tag-ico"><HeartHandshake size={24} /></span><b>Our Mission</b></div>
+          <Split id="mission-title" className="ab-h2" delay="100ms" parts={[{ t: 'Guided by' }, { t: 'seva,', em: true }, { t: 'every single day.' }]} />
+          <p className="ab-mission-text" data-r="blur" style={{ '--d': '500ms' }}>{missionStatement}</p>
 
           <div className="ab-cards">
             {missionCards.map(({ icon: Icon, title, text }, i) => (
-              <article className="ab-card" key={title} data-r="up" style={{ '--d': `${i * 130}ms` }}>
+              <article className="ab-card" key={title} data-r="up" style={{ '--d': `${i * 140}ms` }}>
                 <span className="ab-card-ico"><Icon size={30} /></span>
                 <h3>{title}</h3>
                 <p>{text}</p>
@@ -273,13 +267,13 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ───────── 5. VALUES (stickers) ───────── */}
-      <section className="ab-values ab-paper" aria-labelledby="values-title">
+      {/* ───────── 5. VALUES — midnight navy + gold ───────── */}
+      <section className="ab-values" aria-labelledby="values-title">
         <div className="ab-wrap">
           <div className="ab-values-head">
-            <div className="ab-tag" data-r><span className="ab-tag-ico"><ShieldCheck size={24} /></span><b>Our Values</b></div>
-            <h2 className="ab-h2" id="values-title" data-r style={{ '--d': '100ms' }}>How we <em>show up</em>.</h2>
-            <p data-r style={{ '--d': '200ms' }}>The principles that guide how we speak, act and care.</p>
+            <div className="ab-tag" data-r="left"><span className="ab-tag-ico"><ShieldCheck size={24} /></span><b>Our Values</b></div>
+            <Split id="values-title" className="ab-h2" delay="100ms" parts={[{ t: 'How we' }, { t: 'show up.', em: true }]} />
+            <p data-r="blur" style={{ '--d': '500ms' }}>The principles that guide how we speak, act and care.</p>
           </div>
           <div className="ab-stickers">
             {values.map((v, i) => {
@@ -296,13 +290,13 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ───────── 6. THE HERD (collage) ───────── */}
+      {/* ───────── 6. THE HERD — sage mist + forest ───────── */}
       <section className="ab-herd ab-paper" aria-labelledby="herd-title">
         <div className="ab-wrap">
           <div className="ab-herd-head">
-            <div className="ab-tag" data-r><span className="ab-tag-ico"><Heart size={24} fill="currentColor" /></span><b>The Herd</b></div>
-            <h2 className="ab-h2" id="herd-title" data-r style={{ '--d': '100ms' }}>Every cow has a <em>name</em> and a place to rest.</h2>
-            <p data-r style={{ '--d': '200ms' }}>A few moments from the Foundation&apos;s care.</p>
+            <div className="ab-tag" data-r="left"><span className="ab-tag-ico"><Heart size={24} fill="currentColor" /></span><b>The Herd</b></div>
+            <Split id="herd-title" className="ab-h2" delay="100ms" parts={[{ t: 'Every cow has a' }, { t: 'name', em: true }, { t: 'and a place to rest.' }]} />
+            <p data-r="blur" style={{ '--d': '500ms' }}>A few moments from the Foundation&apos;s care.</p>
           </div>
 
           <div className="ab-collage">
@@ -313,7 +307,7 @@ export default function AboutUs() {
                   src={src}
                   alt={HERD_CAPTIONS[i]}
                   caption={HERD_CAPTIONS[i]}
-                  back={['var(--ab-lilac)', 'var(--ab-gold-soft)', 'var(--ab-mint)'][i]}
+                  back={['var(--s-accent2)', 'var(--s-accent)', 'var(--s-accent3)'][i]}
                   style={{ '--bd': `${-i * 2}s` }}
                 />
               </div>
@@ -322,41 +316,41 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ───────── 7. JOURNEY ───────── */}
+      {/* ───────── 7. JOURNEY — deep plum + rose gold ───────── */}
       <section className="ab-journey" aria-labelledby="journey-title">
         <div className="ab-wrap">
           <div className="ab-journey-head">
-            <div className="ab-tag" data-r><span className="ab-tag-ico"><Sparkles size={24} /></span><b>Our Journey</b></div>
-            <h2 className="ab-h2" id="journey-title" data-r style={{ '--d': '100ms' }}>A record of <em>verified</em> milestones.</h2>
+            <div className="ab-tag" data-r="left"><span className="ab-tag-ico"><Sparkles size={24} /></span><b>Our Journey</b></div>
+            <Split id="journey-title" className="ab-h2" delay="100ms" parts={[{ t: 'A record of' }, { t: 'verified', em: true }, { t: 'milestones.' }]} />
           </div>
           <div className="ab-tl-wrap">
-          <span className="ab-tl-line" data-r aria-hidden="true" />
-          <ol className="ab-tl">
-            {milestones.map((m, i) => (
-              <li key={`${m.date}-${m.title}`} data-r="left" style={{ '--d': `${i * 150}ms` }}>
-                <time>{m.date}</time>
-                <h3>{m.title}</h3>
-                <p>{m.description}</p>
+            <span className="ab-tl-line" data-r aria-hidden="true" />
+            <ol className="ab-tl">
+              {milestones.map((m, i) => (
+                <li key={`${m.date}-${m.title}`} data-r="left" style={{ '--d': `${i * 150}ms` }}>
+                  <time>{m.date}</time>
+                  <h3>{m.title}</h3>
+                  <p>{m.description}</p>
+                </li>
+              ))}
+              <li className="pending" data-r="left" style={{ '--d': `${milestones.length * 150}ms` }}>
+                <time>Next chapter</time>
+                <h3>Future milestones</h3>
+                <p>Additional entries will be added after the Foundation verifies and approves them.</p>
               </li>
-            ))}
-            <li className="pending" data-r="left" style={{ '--d': `${milestones.length * 150}ms` }}>
-              <time>Next chapter</time>
-              <h3>Future milestones</h3>
-              <p>Additional entries will be added after the Foundation verifies and approves them.</p>
-            </li>
-          </ol>
+            </ol>
           </div>
         </div>
       </section>
 
-      {/* ───────── 8. FOUNDERS ───────── */}
+      {/* ───────── 8. FOUNDERS — champagne + copper ───────── */}
       {founders?.length > 0 && (
         <section className="ab-founders ab-paper" aria-labelledby="founders-title">
           <div className="ab-wrap">
             <div className="ab-founders-head">
-              <div className="ab-tag" data-r><span className="ab-tag-ico"><UsersRound size={24} /></span><b>Our Founders</b></div>
-              <h2 className="ab-h2" id="founders-title" data-r style={{ '--d': '100ms' }}>The people behind the <em>seva</em>.</h2>
-              <p data-r style={{ '--d': '200ms' }}>It began with two people and one simple belief: no cow should go without care.</p>
+              <div className="ab-tag" data-r="left"><span className="ab-tag-ico"><UsersRound size={24} /></span><b>Our Founders</b></div>
+              <Split id="founders-title" className="ab-h2" delay="100ms" parts={[{ t: 'The people behind the' }, { t: 'seva.', em: true }]} />
+              <p data-r="blur" style={{ '--d': '500ms' }}>It began with two people and one simple belief: no cow should go without care.</p>
             </div>
             <div className="ab-founder-row">
               {founders.map((f, i) => (
@@ -371,13 +365,13 @@ export default function AboutUs() {
         </section>
       )}
 
-      {/* ───────── 9. LEGAL ───────── */}
+      {/* ───────── 9. LEGAL — deep teal + aqua ───────── */}
       <section className="ab-legal" aria-labelledby="legal-title">
         <div className="ab-wrap ab-legal-grid">
           <div>
-            <div className="ab-tag" data-r><span className="ab-tag-ico"><Landmark size={24} /></span><b>Transparency</b></div>
-            <h2 className="ab-h2" id="legal-title" data-r style={{ '--d': '100ms' }}>Details you can <em>verify</em>.</h2>
-            <p className="ab-legal-note" data-r style={{ '--d': '200ms' }}>{legalClarification}</p>
+            <div className="ab-tag" data-r="left"><span className="ab-tag-ico"><Landmark size={24} /></span><b>Transparency</b></div>
+            <Split id="legal-title" className="ab-h2" delay="100ms" parts={[{ t: 'Details you can' }, { t: 'verify.', em: true }]} />
+            <p className="ab-legal-note" data-r="blur" style={{ '--d': '500ms' }}>{legalClarification}</p>
           </div>
           <dl className="ab-legal-list" data-r="right">
             <div><dt>Official name</dt><dd>{officialName}</dd></div>
@@ -390,19 +384,7 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ───────── 10. CTA ───────── */}
-      <section className="ab-cta" aria-labelledby="cta-title">
-        <Heart className="ab-cta-heart h1" size={64} fill="currentColor" aria-hidden="true" />
-        <Heart className="ab-cta-heart h2" size={90} fill="currentColor" aria-hidden="true" />
-        <div className="ab-wrap">
-          <h2 id="cta-title" data-r="zoom">Be part of the <em style={{ fontStyle: 'italic' }}>herd&apos;s</em> story.</h2>
-          <p data-r style={{ '--d': '150ms' }}>Every rupee and every kind word goes towards the daily care of the cows.</p>
-          <div className="ab-cta-row" data-r style={{ '--d': '300ms' }}>
-            <Link to="/donate" className="ab-btn ab-btn-solid"><Heart size={18} fill="currentColor" /> Donate now</Link>
-            <Link to="/#gallery" className="ab-btn ab-btn-line">Meet the herd <ArrowUpRight size={18} /></Link>
-          </div>
-        </div>
-      </section>
+      
     </div>
   )
-}
+}   
