@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Heart, Menu, X } from 'lucide-react'
-import './navbar-float.css'
 
 const links = [
   { to: '/', label: 'Home', hash: '' },
-  { to: '/about', label: 'About', hash: '' },
-  { to: '/our-work', label: 'What We Do', hash: '' },
-  { to: '/campaigns', label: 'Campaigns', hash: '' },
-  { to: '/gallery', label: 'Gallery', hash: '' },
-  { to: '/get-involved', label: 'Get Involved', hash: '' },
-  { to: '/contact', label: 'Contact', hash: '' },
+  { to: '/about', label: 'About Us', hash: '' },
+  { to: '/#initiatives', label: 'What We Do', hash: '#initiatives' },
+  { to: '/#gallery', label: 'Gallery', hash: '#gallery' },
+  { to: '/#founders', label: 'Founders', hash: '#founders' },
+  { to: '/#contact', label: 'Contact', hash: '#contact' },
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [compact, setCompact] = useState(false)
   const location = useLocation()
-  const isHome = location.pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 24)
@@ -30,11 +27,10 @@ export default function Navbar() {
     if (event.key === 'Escape') closeMenu()
   }
 
-  // home-navbar = Home wala floating card (logo size, text size, color). Baaki pages par is-sub se sticky.
   return (
-    <header className={`navbar home-navbar ${isHome ? '' : 'is-sub'} ${compact ? 'is-compact' : ''}`} onKeyDown={onKeyDown}>
+    <header className={`navbar ${location.pathname === '/' ? 'home-navbar' : ''} ${compact ? 'is-compact' : ''}`} onKeyDown={onKeyDown}>
       <a href="#main" className="skip">Skip to content</a>
-
+     
       <div className="container nav-inner">
         <Link to="/" className="brand" aria-label="GAUSEVARATHA SWAYAM SEVAK CHARITABLE FOUNDATION home" onClick={closeMenu}>
           <img src="/images/gausevarth.logo.jpeg" alt="" width="100" height="100" />
@@ -56,14 +52,9 @@ export default function Navbar() {
               onClick={closeMenu}
             >{link.label}</Link>
           ))}
-          <Link
-            to="/donate"
-            className="btn btn-primary nav-donate"
-            aria-current={location.pathname === '/donate' ? 'page' : undefined}
-            onClick={closeMenu}
-          ><Heart size={15} fill="currentColor" /> Donate Now</Link>
+          <Link to="/#donate" className="btn btn-primary nav-donate" onClick={closeMenu}><Heart size={15} fill="currentColor" /> Donate Now</Link>
         </nav>
       </div>
     </header>
   )
-}   
+}

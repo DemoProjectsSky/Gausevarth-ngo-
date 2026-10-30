@@ -1,13 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  ArrowUpRight, Droplets, Heart, Mail, MapPin, Phone,
-  Play, Stethoscope, Wheat, Warehouse,
+  ArrowDown, ArrowUpRight, Check, Copy, Droplets, Heart, Mail, MapPin, Phone,
+  Play, ShieldCheck, Stethoscope, Wheat, Warehouse,
 } from 'lucide-react'
 import { foundationContent } from '../content/foundationContent'
-import { Flower, Leaf, Spark } from '../components/Shared'
 import './gs-update.css'
-import './gs-donate.css'
 
 const LOGO = '/images/gausevarth.logo.jpeg'
 
@@ -83,16 +81,13 @@ function CountUp({ to, from, duration = 1400 }) {
   const ok = Number.isFinite(target)
   const start = Number.isFinite(from) ? from : Math.max(0, target - 24)
   const ref = useRef(null)
-  const [val, setVal] = useState(() => {
-    if (!ok) return 0
-    const still = typeof window === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    return still ? target : start
-  })
+  const [val, setVal] = useState(ok ? target : 0)
 
   useEffect(() => {
     if (!ok) return undefined
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce || !('IntersectionObserver' in window)) return undefined
+    setVal(start)
     let raf = 0
     const io = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting) return
@@ -188,14 +183,6 @@ const herd = [
   { cls: 'tall', ar: .62, cx: .09, cy: .85, f: .22, cap: 'Fodder for the day' },
 ]
 
-const explore = [
-  { to: '/our-work', title: 'What we do', text: 'Fodder, water, medical care and shelter, every day.', image: '/images/gallery-07.jpg', color: '#f6a935', cls: 'big' },
-  { to: '/campaigns', title: 'Campaigns', text: 'Give with a purpose.', image: '/images/gallery-06.jpg', color: '#ff6b8f' },
-  { to: '/gallery', title: 'Gallery', text: 'Meet the herd.', image: '/images/gallery-04.jpg', color: '#c9a7ff' },
-  { to: '/get-involved', title: 'Get involved', text: 'Many hands, one herd.', image: '/images/gallery-03.jpg', color: '#8ec5ff' },
-  { to: '/contact', title: 'Contact', text: 'Come say hello.', image: '/images/gallery-01.jpg', color: '#7ee0c3' },
-]
-
 const uses = [
   { icon: Wheat, title: 'Fodder', text: 'Green and dry feed, every day of the year.' },
   { icon: Droplets, title: 'Clean water', text: 'Fresh drinking water through the Rajasthan summers.' },
@@ -203,22 +190,90 @@ const uses = [
   { icon: Warehouse, title: 'Shelter', text: 'Shade, rest and protection from heat and cold.' },
 ]
 
-/* ---------- donate card (QR preview -> /donate page) ---------- */
+/* ---------- donation card ---------- */
 
-function DonateQrCard() {
+function DonationCard({ donation }) {
+  const [freq, setFreq] = useState('once')
+  const [amount, setAmount] = useState(donation.amounts?.[1] ?? 1100)
+  const [custom, setCustom] = useState('')
+  const [purpose, setPurpose] = useState(donation.purposes?.[0] ?? 'Where needed most')
+  const [notice, setNotice] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const final = custom !== '' ? Number(custom) : amount
+  const valid = Number.isFinite(final) && final >= 1
+  const money = useMemo(() => (valid ? `₹${final.toLocaleString('en-IN')}` : '₹0'), [final, valid])
+
+  const submit = () => {
+    if (!valid) return
+    if (donation.enabled && donation.paymentUrl) {
+      window.open(donation.paymentUrl, '_blank', 'noopener,noreferrer')
+      return
+    }
+    setNotice(true)
+  }
+
+  const copyUpi = async () => {
+    try {
+      await navigator.clipboard.writeText(donation.upiId)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1800)
+    } catch { /* clipboard may be blocked; ignore */ }
+  }
+
   return (
-    <div className="gs-give-card gs-give-qr" data-anim="right">
-      <p className="gs-give-label">Donate by QR code</p>
-      <img
-  src="/images/gausevath ngo qr.jpeg"
-  alt="Gausevarth NGO Donation UPI QR Code"
-  loading="lazy"
-/>
-      <p>Scan with any UPI app, or open the donate page for the QR and full bank details.</p>
-      <Link to="/donate" className="gs-give-btn">
+    <div className="gs-give-card" data-anim="right">
+      <div className="gs-seg" role="tablist" aria-label="Donation frequency">
+        {[['once', 'Give once'], ['monthly', 'Every month']].map(([k, label]) => (
+          <button key={k} type="button" role="tab" aria-selected={freq === k} className={freq === k ? 'on' : ''} onClick={() => setFreq(k)}>{label}</button>
+        ))}
+        <span className="gs-seg-pill" style={{ transform: `translateX(${freq === 'once' ? 0 : 100}%)` }} />
+      </div>
+
+      <p className="gs-give-label">Choose an amount</p>
+      <div className="gs-chips">
+        {donation.amounts.map(a => (
+          <button key={a} type="button" className={custom === '' && amount === a ? 'on' : ''} onClick={() => { setAmount(a); setCustom('') }}>
+            ₹{a.toLocaleString('en-IN')}
+          </button>
+        ))}
+      </div>
+      <label className="gs-custom">
+        <span>₹</span>
+        <input inputMode="numeric" placeholder="Other amount" value={custom}
+          onChange={e => setCustom(e.target.value.replace(/\D/g, '').slice(0, 7))} aria-label="Custom amount in rupees" />
+      </label>
+
+      <p className="gs-give-label">Where should it go?</p>
+      <div className="gs-chips gs-chips-sm">
+        {donation.purposes.map(p => (
+          <button key={p} type="button" className={purpose === p ? 'on alt' : ''} onClick={() => setPurpose(p)}>{p}</button>
+        ))}
+      </div>
+
+      <button type="button" className="gs-give-btn" onClick={submit} disabled={!valid}>
         <Heart size={18} fill="currentColor" />
-        <span>Donate now</span>
-      </Link>
+        <span>Donate {money}{freq === 'monthly' ? ' / month' : ''}</span>
+      </button>
+      <p className="gs-give-sum">For <b>{purpose.toLowerCase()}</b></p>
+
+      {notice && (
+        <div className="gs-notice" role="status">
+          <ShieldCheck size={20} />
+          <div>
+            <strong>Online payment is being set up.</strong>
+            <p>{donation.note}</p>
+          </div>
+        </div>
+      )}
+
+      {donation.upiId && (
+        <div className="gs-upi">
+          <span>UPI</span><code>{donation.upiId}</code>
+          <button type="button" onClick={copyUpi} aria-label="Copy UPI ID">{copied ? <Check size={16} /> : <Copy size={16} />}</button>
+        </div>
+      )}
+
       <small className="gs-give-fine">Donations are voluntary. No tax-exemption (such as 80G) is implied unless the Foundation confirms it.</small>
     </div>
   )
@@ -231,7 +286,7 @@ export default function Home() {
   const {
     officialName, incorporatedOn, incorporationYear, organisationType, governingLaw,
     cin, section8LicenceNumber, registeredRecordLocation, legalClarification,
-    founders, contact, missionStatement, aboutVideo,
+    founders, donation, contact, missionStatement, aboutVideo,
   } = foundationContent
 
   const video = { ...ABOUT_VIDEO, ...(aboutVideo || {}) }
@@ -376,10 +431,6 @@ export default function Home() {
       <section id="top" className="gs-hero" data-prog aria-labelledby="hero-title">
         <div className="gs-hero-bg" aria-hidden="true" />
         <div className="gs-hero-shade" aria-hidden="true" />
-        <div className="gp-floaters gs-hero-floaters" aria-hidden="true">
-          <Flower className="f f1" /><Leaf className="f f2" /><Spark className="f f3" /><Heart className="f f4" fill="currentColor" />
-          <Spark className="f f5" /><Leaf className="f f6" /><Flower className="f f7" />
-        </div>
         <div className="gs-hero-inner">
           <h1 id="hero-title" className="gs-hero-title">
             <Split text="Happy cows," />
@@ -390,7 +441,7 @@ export default function Home() {
             Compassionate care today, for a kinder world tomorrow. Every cow here has a name, a place to rest and someone who cares.
           </p>
           <div className="gs-hero-cta" data-anim="up" style={{ '--d': '850ms' }}>
-            <Link to="/donate" className="gs-btn gs-btn-sun" data-magnet><Heart size={17} fill="currentColor" /> Donate now</Link>
+            <a href="#donate" className="gs-btn gs-btn-sun" data-magnet><Heart size={17} fill="currentColor" /> Donate now</a>
             <a href="#herd" className="gs-btn gs-btn-ghost" data-magnet>Meet the herd </a>
           </div>
         </div>
@@ -452,7 +503,6 @@ export default function Home() {
           <span className="gs-kicker" data-anim="up">What we stand for</span>
           <h2 id="pillars-title"><Split text="Three words, one promise." /></h2>
         </header>
-        <p className="gs-pillars-more" data-anim="up"><Link to="/our-work" className="gs-link">See everything we do <ArrowUpRight size={18} /></Link></p>
         <div className="gs-stack">
           {pillars.map((p, i) => (
             <article key={p.key} className={`gs-pillar gs-pillar-${p.key}`} style={{ '--i': i }}>
@@ -484,7 +534,7 @@ export default function Home() {
                 <figcaption>{h.cap}</figcaption>
               </figure>
             ))}
-            <div className="gs-herd-end"><span>Want to see more?</span><Link to="/gallery" className="gs-btn gs-btn-lilac" data-magnet>Full gallery <ArrowUpRight size={16} /></Link></div>
+            <div className="gs-herd-end"><span>Want to see more?</span><a href="#donate" className="gs-btn gs-btn-lilac" data-magnet>Support them <Heart size={16} fill="currentColor" /></a></div>
           </div>
           <div className="gs-herd-meter" aria-hidden="true"><i /></div>
         </div>
@@ -507,35 +557,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5b ─ EXPLORE · quick links to every page */}
-      <section className="gs-explore" aria-labelledby="explore-title">
-        <header className="gs-explore-head">
-          <span className="gs-kicker" data-anim="up">Explore</span>
-          <h2 id="explore-title"><Split text="There is more to see." /></h2>
-        </header>
-        <div className="gs-explore-grid">
-          {explore.map((e, i) => (
-            <Link key={e.to} to={e.to} className={`gs-tile ${e.cls || ''}`} data-anim="up" style={{ '--d': `${i * 90}ms`, '--tc': e.color }}>
-              <img src={e.image} alt="" loading="lazy" />
-              <span className="gs-tile-label">
-                <b>{e.title}</b>
-                <small>{e.text}</small>
-                <i><ArrowUpRight size={20} /></i>
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
       <Marquee reverse className="gs-m-ink" items={['Feed a cow', 'Save a life', 'Spread kindness', 'Give with love']} />
 
-      {/* 6 ─ DONATE · vermilion + cream (QR card -> /donate) */}
+      {/* 6 ─ DONATE · vermilion + cream */}
       <section id="donate" className="gs-donate" data-prog aria-labelledby="donate-title">
         <div className="gs-donate-glow" aria-hidden="true" />
         <div className="gs-donate-copy">
           <span className="gs-kicker" data-anim="up">Support the Foundation</span>
           <h2 id="donate-title"><Split text="Feed a cow." /><Split text="Warm a heart." start={11} className="gs-ital" /></h2>
-          <p data-anim="up" style={{ '--d': '300ms' }}>Whatever you can give goes towards the daily care of the cows. Scan the QR code, pay any amount, and we will take it from there.</p>
+          <p data-anim="up" style={{ '--d': '300ms' }}>Whatever you can give goes towards the daily care of the cows. Pick an amount, pick a cause, and we will take it from there.</p>
           <ul className="gs-uses">
             {uses.map(({ icon: Icon, title, text }, i) => (
               <li key={title} data-anim="up" style={{ '--d': `${400 + i * 110}ms` }}>
@@ -545,7 +575,7 @@ export default function Home() {
             ))}
           </ul>
         </div>
-        <DonateQrCard />
+        <DonationCard donation={donation} />
       </section>
 
       {/* 7 ─ FIND US / VERIFY · sand + cobalt */}

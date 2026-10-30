@@ -42,7 +42,7 @@ export default function Footer() {
               <span>Seva, Sanrakshan aur Jeev Daya</span>
             </div>
           </div>
-          <Link to="/donate" className="gs-footer-give"><Heart size={18} fill="currentColor" /> Donate now</Link>
+          <Link to="/#donate" className="gs-footer-give"><Heart size={18} fill="currentColor" /> Donate now</Link>
         </div>
 
         <div className="gs-footer-cols">
@@ -50,18 +50,15 @@ export default function Footer() {
             <h3>Explore</h3>
             <ul>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/our-work">What we do</Link></li>
-              <li><Link to="/campaigns">Campaigns</Link></li>
-              <li><Link to="/gallery">Gallery</Link></li>
-              <li><Link to="/get-involved">Get involved</Link></li>
+              <li><Link to="/#initiatives">What we do</Link></li>
+              <li><Link to="/#gallery">Gallery</Link></li>
+              <li><Link to="/#founders">Founders</Link></li>
             </ul>
           </div>
           <div>
             <h3>Information</h3>
             <ul>
-              <li><Link to="/donate">Donate</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/#founders">Founders</Link></li>
+              <li><Link to="/#donate">Donate</Link></li>
               <li><Link to="/#transparency">Transparency</Link></li>
               <li><Link to="/privacy">Privacy Policy</Link></li>
               <li><Link to="/terms">Terms of Use</Link></li>
@@ -76,7 +73,7 @@ export default function Footer() {
 
         <div className="gs-wordmark" aria-hidden="true">
           <svg className="line" viewBox="0 0 1000 200" preserveAspectRatio="none">
-            <text x="0" y="172" textLength="1000" lengthAdjust="spacingAndGlyphs">GAU SEVARTH</text>
+           
           </svg>
           <svg className="fill" viewBox="0 0 1000 200" preserveAspectRatio="none">
             <defs>
@@ -85,7 +82,7 @@ export default function Footer() {
                 <stop offset="1" stopColor="#d9823b" />
               </linearGradient>
             </defs>
-            <text x="0" y="172" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="url(#gs-wm)">GAU SEVARTH</text>
+           
           </svg>
         </div>
 
