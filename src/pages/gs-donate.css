@@ -163,7 +163,7 @@
   margin: 0;
   max-width: 56ch;
   color: rgba(255, 246, 229, .88);
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
   font-size: clamp(16px, 1.5vw, 19px);
   line-height: 1.7;
 }

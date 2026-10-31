@@ -134,7 +134,7 @@
   position: relative; padding: clamp(70px, 9vw, 130px) 0; overflow: hidden;
 }
 .ab-vision-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(30px, 5vw, 80px); align-items: center; }
-.ab-vision-copy p { margin-top: 18px; max-width: 54ch; font: 400 clamp(16px, 1.4vw, 18px)/1.8 'Fraunces', Georgia, serif; color: var(--s-muted); }
+.ab-vision-copy p { margin-top: 18px; max-width: 54ch; font: 400 clamp(16px, 1.4vw, 18px)/1.8 'Fraunces Variable', 'Fraunces', Georgia, serif; color: var(--s-muted); }
 .ab-vision-copy .ab-h2 { max-width: 14ch; }
 .ab-vision-copy .ab-h2::after { margin-bottom: 8px; }
 .ab-vision-media { position: relative; }
@@ -202,7 +202,7 @@
   position: relative; padding: clamp(80px, 10vw, 140px) 0 clamp(80px, 9vw, 120px); overflow: hidden;
 }
 .ab-mission .ab-h2 { max-width: 18ch; }
-.ab-mission-text { max-width: 74ch; margin-top: 18px; color: var(--s-muted); font: 400 clamp(16px, 1.4vw, 18px)/1.8 'Fraunces', Georgia, serif; }
+.ab-mission-text { max-width: 74ch; margin-top: 18px; color: var(--s-muted); font: 400 clamp(16px, 1.4vw, 18px)/1.8 'Fraunces Variable', 'Fraunces', Georgia, serif; }
 .ab-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-top: clamp(70px, 8vw, 100px); }
 .ab-card {
   position: relative; padding: 62px 24px 30px; border: 1px solid rgba(140, 37, 67, .2); border-radius: 22px; text-align: center;
@@ -228,7 +228,7 @@
   background-image: radial-gradient(circle at 85% 0%, rgba(240, 195, 107, .14), transparent 40%), radial-gradient(circle at 0% 100%, rgba(80, 110, 190, .22), transparent 45%);
 }
 .ab-values-head { max-width: 640px; margin-bottom: 44px; }
-.ab-values-head p { margin-top: 14px; color: var(--s-muted); font: 400 17px/1.7 'Fraunces', Georgia, serif; }
+.ab-values-head p { margin-top: 14px; color: var(--s-muted); font: 400 17px/1.7 'Fraunces Variable', 'Fraunces', Georgia, serif; }
 .ab-stickers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
 .ab-sticker {
   padding: 26px 22px 28px; border-radius: 26px; border: 3px solid #0a1226; box-shadow: 7px 7px 0 var(--s-accent);
@@ -250,7 +250,7 @@
   padding: clamp(60px, 8vw, 110px) 0 clamp(70px, 9vw, 130px);
 }
 .ab-herd-head { text-align: center; margin-bottom: clamp(40px, 5vw, 70px); }
-.ab-herd-head p { max-width: 54ch; margin: 14px auto 0; color: var(--s-muted); font: 400 17px/1.7 'Fraunces', Georgia, serif; }
+.ab-herd-head p { max-width: 54ch; margin: 14px auto 0; color: var(--s-muted); font: 400 17px/1.7 'Fraunces Variable', 'Fraunces', Georgia, serif; }
 .ab-collage { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: clamp(18px, 3vw, 44px); align-items: center; }
 .ab-collage > :nth-child(1) { margin-top: 12%; }
 .ab-collage > :nth-child(3) { margin-top: 20%; }
@@ -284,7 +284,7 @@
   padding: clamp(70px, 9vw, 120px) 0;
 }
 .ab-founders-head { text-align: center; margin-bottom: 56px; }
-.ab-founders-head p { max-width: 52ch; margin: 14px auto 0; color: var(--s-muted); font: 400 17px/1.7 'Fraunces', Georgia, serif; }
+.ab-founders-head p { max-width: 52ch; margin: 14px auto 0; color: var(--s-muted); font: 400 17px/1.7 'Fraunces Variable', 'Fraunces', Georgia, serif; }
 .ab-founder-row { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(28px, 5vw, 70px); }
 .ab-founder { width: min(300px, 86vw); text-align: center; transition: transform .5s cubic-bezier(.3, 1.5, .5, 1); }
 .ab-founder:nth-child(odd) { rotate: -2deg; }
@@ -321,7 +321,7 @@
 }
 .ab-cta h2 { font-size: clamp(42px, 7vw, 96px); line-height: 1.05; }
 .ab-cta h2 em { font-style: italic; }
-.ab-cta p { max-width: 50ch; margin: 18px auto 0; font: 400 18px/1.7 'Fraunces', Georgia, serif; }
+.ab-cta p { max-width: 50ch; margin: 18px auto 0; font: 400 18px/1.7 'Fraunces Variable', 'Fraunces', Georgia, serif; }
 .ab-cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 32px; }
 .ab-btn {
   position: relative; display: inline-flex; align-items: center; gap: 9px; min-height: 54px; padding: 12px 26px; overflow: hidden;

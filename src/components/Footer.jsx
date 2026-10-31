@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUp, Heart, MapPin } from 'lucide-react'
+import { ArrowUp, Heart, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
+import { foundationContent } from '../content/foundationContent'
 
 const officialName = 'GAUSEVARATHA SWAYAM SEVAK CHARITABLE FOUNDATION'
+const { contact } = foundationContent
 
 export default function Footer() {
   const ref = useRef(null)
@@ -50,10 +52,10 @@ export default function Footer() {
             <h3>Explore</h3>
             <ul>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/our-work">What we do</Link></li>
+              <li><Link to="/our-work">What We Do</Link></li>
               <li><Link to="/campaigns">Campaigns</Link></li>
               <li><Link to="/gallery">Gallery</Link></li>
-              <li><Link to="/get-involved">Get involved</Link></li>
+              <li><Link to="/get-involved">Get Involved</Link></li>
             </ul>
           </div>
           <div>
@@ -61,22 +63,26 @@ export default function Footer() {
             <ul>
               <li><Link to="/donate">Donate</Link></li>
               <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/#founders">Founders</Link></li>
-              <li><Link to="/#transparency">Transparency</Link></li>
+              <li><Link to="/about#legal-title">Transparency</Link></li>
               <li><Link to="/privacy">Privacy Policy</Link></li>
               <li><Link to="/terms">Terms of Use</Link></li>
             </ul>
           </div>
-          <div>
-            <h3>Find us</h3>
-            <p><MapPin size={16} /> Bap, Jodhpur,<br />Rajasthan - 342307</p>
+          <div className="gs-footer-contact">
+            <h3>Contact us</h3>
+            <ul>
+              <li><a href={`tel:+91${contact.phone}`}><Phone size={16} /> +91 {contact.phone}</a></li>
+              <li><a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={16} /> WhatsApp</a></li>
+              <li><a href={`mailto:${contact.email}`}><Mail size={16} /> {contact.email}</a></li>
+              <li><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Bap, Jodhpur, Rajasthan 342307')}`} target="_blank" rel="noopener noreferrer"><MapPin size={16} /> Bap, Jodhpur, Rajasthan - 342307</a></li>
+            </ul>
             <p className="gs-footer-small">Section 8 company under the Companies Act, 2013.</p>
           </div>
         </div>
 
         <div className="gs-wordmark" aria-hidden="true">
           <svg className="line" viewBox="0 0 1000 200" preserveAspectRatio="none">
-            <text x="0" y="172" textLength="1000" lengthAdjust="spacingAndGlyphs">GAU SEVARTH</text>
+            <text x="500" y="178" textAnchor="middle" textLength="980" lengthAdjust="spacingAndGlyphs">GAU SEVARTH</text>
           </svg>
           <svg className="fill" viewBox="0 0 1000 200" preserveAspectRatio="none">
             <defs>
@@ -85,7 +91,7 @@ export default function Footer() {
                 <stop offset="1" stopColor="#d9823b" />
               </linearGradient>
             </defs>
-            <text x="0" y="172" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="url(#gs-wm)">GAU SEVARTH</text>
+            <text x="500" y="178" textAnchor="middle" textLength="980" lengthAdjust="spacingAndGlyphs" fill="url(#gs-wm)">GAU SEVARTH</text>
           </svg>
         </div>
 

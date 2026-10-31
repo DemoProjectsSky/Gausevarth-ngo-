@@ -1,41 +1,46 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, Flame, Heart, Smartphone, Snowflake, Stethoscope, Wheat } from 'lucide-react'
-import { foundationContent } from '../content/foundationContent'
+import { ArrowUpRight, Check, Copy, Download, Flame, Heart, ScanLine, ShieldCheck, Smartphone, Snowflake, Stethoscope, Wheat } from 'lucide-react'
 import { BANK, upiLink } from '../content/bank'
 import { CtaBand, Marquee, Page, PageHero, ShapePhoto, Split } from '../components/Shared'
+
+/* QR image (public/images/ ke andar) - donate page wali hi image */
+const QR_IMAGE = encodeURI('/images/gausevath ngo qr.jpeg')
 import './gs-pages.css'
 
 const campaigns = [
   { key: 'fodder', icon: Wheat, tag: 'Always open', title: 'Fodder Drive', purpose: 'Fodder',
     text: 'Fill the feeding troughs. Green and dry fodder for the whole herd, all year.',
-    image: '/images/gallery-07.jpg', alt: 'Basket of dry fodder', color: '#f6a935' },
+    image: '/images/gausevarth gallery19.png', alt: 'Basket of dry fodder', color: '#f6a935' },
   { key: 'summer', icon: Flame, tag: 'Summer', title: 'Cool Water Summer', purpose: 'Clean water',
     text: 'Keep clean drinking water and shade ready through the hottest Rajasthan months.',
-    image: '/images/gallery-05.jpg', alt: 'Bowl of milk and leaves', color: '#e8704f' },
+    image: '/images/gausevarth gallery17.jpg', alt: 'Bowl of milk and leaves', color: '#e8704f' },
   { key: 'winter', icon: Snowflake, tag: 'Winter', title: 'Winter Warmth', purpose: 'Shelter',
     text: 'Dry bedding and warm, covered shelter so calves and old cows stay safe in the cold nights.',
-    image: '/images/gallery-06.jpg', alt: 'A calf resting', color: '#ffd166' },
+    image: '/images/gausevarth gallery20.jpg', alt: 'A calf resting', color: '#ffd166' },
   { key: 'healing', icon: Stethoscope, tag: 'Always open', title: 'Healing Hands', purpose: 'Medical care',
     text: 'Treatment, medicines and recovery time for cows that are sick, injured or abandoned.',
-    image: '/images/gallery-01.jpg', alt: 'A white cow resting', color: '#f2b98a' },
+    image: '/images/gausevarth gallery3.png ', alt: 'A white cow resting', color: '#f2b98a' },
 ]
 
 const steps = [
-  { n: '1', title: 'Pick a campaign', text: 'Choose what you would like your gift to go towards.' },
-  { n: '2', title: 'Choose an amount', text: 'Any amount helps. Use a suggested one or enter your own.' },
-  { n: '3', title: 'Pay by UPI', text: 'Pay from any UPI app, or scan the QR on the donate page.' },
+  { n: '1', title: 'Pick a campaign', text: 'Choose the cause you would like your gift to go towards.' },
+  { n: '2', title: 'Scan the QR', text: 'Open GPay, PhonePe, Paytm or any UPI app and scan the code.' },
+  { n: '3', title: 'Enter any amount', text: 'Pay what you wish. The gift goes straight to the cows.' },
 ]
 
 export default function Campaigns() {
-  const { donation } = foundationContent
   const [purpose, setPurpose] = useState(campaigns[0].purpose)
-  const [amount, setAmount] = useState(donation.amounts[1])
-  const [custom, setCustom] = useState('')
+  const [copied, setCopied] = useState(false)
+  const link = upiLink(undefined, `Gau Sevarth - ${purpose}`)
 
-  const value = custom ? Number(custom) : amount
-  const valid = Number.isFinite(value) && value >= 1
-  const link = upiLink(valid ? value : undefined, `Gau Sevarth - ${purpose}`)
+  const copyUpi = async () => {
+    try {
+      await navigator.clipboard.writeText(BANK.upi)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1800)
+    } catch { /* clipboard blocked */ }
+  }
 
   return (
     <Page theme="brown">
@@ -59,7 +64,7 @@ export default function Campaigns() {
           {campaigns.map((c, i) => (
             <article key={c.key} className="gp-card" data-anim="up" style={{ '--d': `${i * 110}ms`, '--card': c.color }}>
               <div className="gp-card-img">
-                <ShapePhoto src={c.image} alt={c.alt} shape={['torn', 'blob', 'wave', 'flower'][i]} color={c.color} />
+                <ShapePhoto src={c.image} alt={c.alt} shape="landscape" color={c.color} />
                 <span className="gp-card-tag"><c.icon size={15} /> {c.tag}</span>
               </div>
               <div className="gp-card-body">
@@ -78,9 +83,9 @@ export default function Campaigns() {
         <div className="gp-give-glow" aria-hidden="true" />
         <div className="gp-give-grid">
           <div className="gp-give-copy">
-            <span className="gs-kicker" data-anim="up">Quick give</span>
+            <span className="gs-kicker" data-anim="up">Give by QR</span>
             <h2 id="give-title" data-anim="up" style={{ '--d': '80ms' }}>Your gift, your choice.</h2>
-            <p data-anim="up" style={{ '--d': '160ms' }}>Select a purpose and an amount. The button opens your UPI app with the details filled in (works on phones). On a computer, use the QR code on the donate page.</p>
+            <p data-anim="up" style={{ '--d': '160ms' }}>Scan the QR code with any UPI app and give any amount you like. On a phone, the button opens your UPI app directly. Choose a campaign so we know what your gift is for.</p>
             <ol className="gp-steps">
               {steps.map((s, i) => (
                 <li key={s.n} data-anim="up" style={{ '--d': `${240 + i * 100}ms` }}>
@@ -91,34 +96,35 @@ export default function Campaigns() {
             </ol>
           </div>
 
-          <div className="gp-picker" data-anim="right">
-            <h3>I want to support</h3>
-            <div className="gp-chips" role="group" aria-label="Purpose">
+          <div className="gp-picker gp-qrbox" data-anim="right">
+            <h3><ScanLine size={20} /> Scan &amp; donate</h3>
+            <div className="gp-chips" role="group" aria-label="Campaign">
               {campaigns.map(c => (
                 <button key={c.key} type="button" className={purpose === c.purpose ? 'on' : ''} aria-pressed={purpose === c.purpose} onClick={() => setPurpose(c.purpose)}>
                   <c.icon size={16} /> {c.purpose}
                 </button>
               ))}
             </div>
-            <h3>With an amount of</h3>
-            <div className="gp-chips gp-amounts" role="group" aria-label="Amount">
-              {donation.amounts.map(a => (
-                <button key={a} type="button" className={!custom && amount === a ? 'on' : ''} aria-pressed={!custom && amount === a} onClick={() => { setAmount(a); setCustom('') }}>
-                  ₹{a.toLocaleString('en-IN')}
-                </button>
-              ))}
+            <div className="gp-qr-frame">
+              <img src={QR_IMAGE} alt="UCO Bank UPI QR code of Gausevaratha Swayam Sevak Charitable Foundation" />
             </div>
-            <label className="gp-custom">
-              <span>Or enter your own</span>
-              <div><b>₹</b><input type="number" inputMode="numeric" min="1" placeholder="Any amount" value={custom} onChange={e => setCustom(e.target.value)} /></div>
-            </label>
-
-            <a className={`gp-pay ${valid ? '' : 'is-off'}`} href={valid ? link : undefined} aria-disabled={!valid}>
-              <Smartphone size={20} />
-              <span>{valid ? `Pay ₹${value.toLocaleString('en-IN')} by UPI` : 'Enter a valid amount'}</span>
-            </a>
-            <Link to="/donate" className="gp-alt">Prefer the QR code or bank transfer? <ArrowUpRight size={15} /></Link>
-            <small className="gp-fine">Paying to {BANK.name} ({BANK.upi}). Please check the name in your UPI app before you pay. Donations are voluntary. No tax-exemption (such as 80G) is implied unless the Foundation confirms it.</small>
+            <div className="gp-upi-row">
+              <span>UPI ID</span>
+              <code>{BANK.upi}</code>
+              <button type="button" onClick={copyUpi} aria-label="Copy UPI ID">{copied ? <Check size={16} /> : <Copy size={16} />}</button>
+            </div>
+            <div className="gp-qr-actions">
+            <a
+  className="gp-pay"
+  href="upi://pay?pa=gauseva3183@ucobank&pn=Gausevarth%20NGO&cu=INR"
+>
+  <Smartphone size={20} />
+  <span>Pay with UPI app</span>
+</a>
+              <a className="gp-pay gp-pay-line" href={QR_IMAGE} download="gausevarth-donate-qr.jpeg"><Download size={18} /><span>Download QR</span></a>
+            </div>
+            <Link to="/donate" className="gp-alt">Prefer bank transfer? See account details <ArrowUpRight size={15} /></Link>
+            <small className="gp-fine"><ShieldCheck size={16} /><span>After scanning, check that your app shows <b>{BANK.name}</b> before you pay. Donations are voluntary. No tax-exemption (such as 80G) is implied unless the Foundation confirms it.</span></small>
           </div>
         </div>
       </section>

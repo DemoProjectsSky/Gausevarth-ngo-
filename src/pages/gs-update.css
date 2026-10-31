@@ -1,6 +1,7 @@
 /* ==========================================================
    Gau Sevarth – update layer
    Hero bottom line fix + existing section designs + brown footer
+   + About video: bada, square frame, poora video dikhe
    ========================================================== */
 
 /* hero ko itna lamba rakha hai ki neeche wali marquee strip
@@ -206,7 +207,7 @@
   --sun: #ffc145;
   --coral: #ff6f59;
   --cream: #fff6e5;
-  --vr: 150px 28px 150px 28px;
+  --vr: 120px 28px 120px 28px;   /* square frame ke liye */
 
   position: relative;
   display: block;
@@ -244,8 +245,14 @@
   animation: gsDrift 9s ease-in-out infinite;
 }
 
-
-
+.gs .gs-story-blobs .b1 {
+  left: 3%;
+  top: 9%;
+  width: 130px;
+  height: 130px;
+  border: 16px solid var(--sun);
+  translate: 0 calc((var(--p, .5) - .5) * -90px);
+}
 
 .gs .gs-story-blobs .b2 {
   right: 6%;
@@ -321,16 +328,17 @@
   align-items: start;
 }
 
+/* video column bada (8 columns) */
 .gs .gs-story-media {
-  grid-column: 1 / span 7;
+  grid-column: 1 / span 8;
   grid-row: 1;
 }
 
 .gs .gs-story-card {
-  grid-column: 7 / span 6;
+  grid-column: 8 / span 5;
   grid-row: 1;
   z-index: 2;
-  margin-top: clamp(70px, 10vw, 150px);
+  margin-top: clamp(120px, 14vw, 220px);
 }
 
 /* Video decorative frame */
@@ -379,12 +387,14 @@
   box-shadow: 0 30px 70px rgba(0, 0, 0, .45);
 }
 
+/* SQUARE frame */
 .gs .gs-vscreen {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
   background: #06201f;
 }
 
+/* object-fit: contain -> poora video dikhe, crop nahi */
 .gs .gs-vscreen > video,
 .gs .gs-vscreen > iframe,
 .gs .gs-vscreen > .gs-vposter,
@@ -394,7 +404,8 @@
   width: 100%;
   height: 100%;
   border: 0;
-  object-fit: cover;
+  object-fit: contain !important;
+  background: #06201f;
 }
 
 .gs .gs-vscreen.is-idle::after {
@@ -557,7 +568,7 @@
 }
 
 .gs .gs-story-card p {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Fraunces Variable', 'Fraunces', Georgia, serif;
   font-size: clamp(16px, 1.4vw, 18px);
   line-height: 1.7;
 }
@@ -606,7 +617,7 @@
   }
 
   .gs .gs-story {
-    --vr: 90px 22px 90px 22px;
+    --vr: 70px 20px 70px 20px;
   }
 
   .gs .gs-story-blobs .b4 {
@@ -616,11 +627,11 @@
 
 @media (max-width: 640px) {
   .gs .gs-story {
-    --vr: 56px 18px 56px 18px;
+    --vr: 48px 16px 48px 16px;
   }
 
   .gs .gs-vscreen {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
   }
 
   .gs .gs-vstack {
@@ -788,281 +799,4 @@
   .gs .gs-scroll-cue {
     display: none !important;
   }
-}
-
-
-/* ==========================================================
-   8. MOBILE HERO — RESPONSIVE FIX
-   Desktop design unchanged
-   ========================================================== */
-
-@media (max-width: 640px) {
-  .gs .gs-hero {
-    width: 100%;
-    max-width: 100%;
-    min-height: 100svh;
-    height: auto;
-
-    padding:
-      112px 20px
-      calc(92px + env(safe-area-inset-bottom));
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    box-sizing: border-box;
-    overflow: hidden;
-    isolation: isolate;
-  }
-
-  .gs .gs-hero-inner {
-    position: relative;
-    z-index: 2;
-
-    width: 100%;
-    max-width: 480px;
-    min-width: 0;
-
-    margin: 0 auto;
-    padding: 0;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 22px;
-    text-align: center;
-
-    box-sizing: border-box;
-
-    /* Disable desktop mouse-parallax movement */
-    translate: none;
-  }
-
-  .gs .gs-hero-title {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-
-    margin: 0;
-
-    font-size: clamp(38px, 11vw, 54px);
-    line-height: 1.12;
-    letter-spacing: -1.5px;
-
-    text-align: center;
-    overflow-wrap: break-word;
-    word-break: normal;
-  }
-
-  .gs .gs-hero-title .gs-split {
-    display: block;
-    max-width: 100%;
-  }
-
-  .gs .gs-hero-title .gs-word {
-    white-space: nowrap;
-  }
-
-  .gs .gs-hero-lead {
-    width: 100%;
-    max-width: 340px;
-
-    margin: 0 auto;
-
-    font-size: 16px;
-    line-height: 1.75;
-
-    text-align: center;
-    text-wrap: pretty;
-  }
-
-  .gs .gs-hero-cta {
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-
-    gap: 12px;
-    margin-top: 2px;
-  }
-
-  .gs .gs-hero-cta .gs-btn {
-    width: 100%;
-    min-width: 0;
-    min-height: 50px;
-
-    padding: 14px 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    box-sizing: border-box;
-
-    font-size: 15px;
-    line-height: 1.4;
-    text-align: center;
-
-    translate: none;
-  }
-
-  /* Circular NGO logo */
-  .gs .gs-seal {
-    position: absolute;
-
-    width: 66px;
-    max-width: 66px;
-
-    right: 16px;
-    bottom: 18px;
-    left: auto;
-
-    translate: none;
-  }
-
-  .gs .gs-seal img {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Keep background effects subtle on phones */
-  .gs .gs-hero-floaters {
-    opacity: 0.35;
-    pointer-events: none;
-  }
-
-  .gs .gs-hero-bg {
-    translate: none;
-  }
-
-  .gs .gs-hero-shade {
-    pointer-events: none;
-  }
-
-  .gs .gs-hero-inner [data-anim] {
-    max-width: 100%;
-  }
-
-  .gs .gs-hero,
-  .gs .gs-hero-inner,
-  .gs .gs-hero-title,
-  .gs .gs-hero-lead,
-  .gs .gs-hero-cta {
-    min-width: 0;
-  }
-
-  /* Avoid button shine overflow */
-  .gs .gs-btn-sun {
-    max-width: 100%;
-  }
-}
-
-/* ==========================================================
-   9. EXTRA-SMALL PHONES
-   ========================================================== */
-
-@media (max-width: 380px) {
-  .gs .gs-hero {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .gs .gs-hero-title {
-    font-size: clamp(34px, 10.5vw, 40px);
-    letter-spacing: -1px;
-  }
-
-  .gs .gs-hero-lead {
-    max-width: 310px;
-    font-size: 15px;
-    line-height: 1.7;
-  }
-
-  .gs .gs-hero-inner {
-    gap: 18px;
-  }
-
-  .gs .gs-hero-cta .gs-btn {
-    padding: 13px 16px;
-    font-size: 14px;
-  }
-
-  .gs .gs-seal {
-    width: 58px;
-    max-width: 58px;
-    right: 12px;
-    bottom: 14px;
-  }
-}
-
-/* ==========================================================
-   10. SHORT MOBILE SCREENS
-   ========================================================== */
-
-@media (max-width: 640px) and (max-height: 700px) {
-  .gs .gs-hero {
-    padding-top: 100px;
-    padding-bottom: 88px;
-  }
-
-  .gs .gs-hero-inner {
-    gap: 16px;
-  }
-
-  .gs .gs-hero-title {
-    font-size: clamp(34px, 9vw, 46px);
-  }
-
-  .gs .gs-hero-lead {
-    line-height: 1.6;
-  }
-}
-
-/* ==========================================================
-   11. MOBILE ACCESSIBILITY
-   ========================================================== */
-
-@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
-  .gs .gs-hero-inner,
-  .gs .gs-hero-bg,
-  .gs .gs-seal,
-  .gs [data-magnet] {
-    translate: none !important;
-  }
-
-  .gs .gs-seal img,
-  .gs .gs-btn-sun::after {
-    animation: none !important;
-  }
-}
-
-/* Hide only the floating Donate button on the Home page */
-.gs > .gs-floating-donate,
-.gs > .gs-float-donate,
-.gs > .gs-donate-float,
-.gs > .gs-fixed-donate,
-.gs > .gs-donate-sticky {
-  display: none !important;
-}
-
-
-/* Remove floating Donate button from the bottom-right of Home page */
-body:has(.gs .gs-hero) a[href="/donate"]:not(.gs .gs-hero-cta a):not(.gs .gs-give-qr a),
-body:has(.gs .gs-hero) button[aria-label*="Donate" i],
-body:has(.gs .gs-hero) a[aria-label*="Donate" i] {
-  /* Intentionally left out: avoid hiding other Donate buttons */
-}
-
-/* Target the fixed-position Donate element */
-.gs a[href="/donate"][style*="position: fixed"],
-body > a[href="/donate"][style*="position: fixed"],
-body > button[style*="position: fixed"] {
-  display: none !important;
 }

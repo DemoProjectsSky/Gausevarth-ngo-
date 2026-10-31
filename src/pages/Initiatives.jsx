@@ -13,25 +13,25 @@ const work = [
     key: 'fodder', icon: Wheat, no: '01', title: 'Fodder', hindi: 'Chara',
     text: 'Green grass, dry fodder and balanced feed, served on time every single day of the year. A well-fed cow is a healthy, calm cow.',
     points: ['Fresh green fodder in season', 'Dry fodder stored for summer and winter', 'Extra care feed for calves and weak cows'],
-    shape: 'torn', image: '/images/gallery-07.jpg', alt: 'A woven basket of dry fodder beside fresh grass',
+    shape: 'landscape', image: '/images/gausevarth gallery16.jpg', alt: 'A woven basket of dry fodder beside fresh grass',
   },
   {
     key: 'water', icon: Droplets, no: '02', title: 'Clean water', hindi: 'Jal',
     text: 'Rajasthan summers are harsh. Fresh, clean drinking water is kept available through the day so no cow ever goes thirsty.',
     points: ['Clean troughs, refilled through the day', 'Cool, shaded drinking points', 'Extra attention in peak summer'],
-    shape: 'blob', image: '/images/gallery-04.jpg', alt: 'A black and white cow resting calmly',
+    shape: 'portrait', image: '/images/gausevarth gallery17.jpg', alt: 'A black and white cow resting calmly',
   },
   {
     key: 'medical', icon: Stethoscope, no: '03', title: 'Medical care', hindi: 'Upchar',
     text: 'Cows that are sick, injured or weak need proper treatment, medicines and time to recover. That is what we work to give them.',
     points: ['Treatment for injured and sick cows', 'Medicines and follow-up care', 'Rest and recovery in a quiet space'],
-    shape: 'flower', image: '/images/gallery-01.jpg', alt: 'A gentle white cow resting with a brass bell',
+    shape: 'square', image: '/images/gausevarth gallery15.jpg', alt: 'A gentle white cow resting with a brass bell',
   },
   {
     key: 'shelter', icon: Warehouse, no: '04', title: 'Shelter', hindi: 'Ashray',
     text: 'A safe, shaded and clean place to rest, protected from the heat of the day and the cold of the night.',
     points: ['Shaded sheds against the sun', 'Warm, dry resting space in winter', 'A safe home for abandoned cows'],
-    shape: 'wave', image: '/images/gallery-03.jpg', alt: 'A brown cow resting on straw',
+    shape: 'landscape', image: '/images/gausevarth gallery18.jpg', alt: 'A brown cow resting on straw',
   },
 ]
 

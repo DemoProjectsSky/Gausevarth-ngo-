@@ -4,7 +4,7 @@ import { foundationContent } from '../content/foundationContent'
 import { Page, PageHero } from '../components/Shared'
 import './gs-pages.css'
 
-const UPDATED = '26 October 2026'
+const UPDATED = '31 October 2026'
 
 const privacy = [
   { id: 'who', title: 'Who we are', body: [
@@ -12,11 +12,11 @@ const privacy = [
   ] },
   { id: 'collect', title: 'What we collect', body: [
     'This website has no accounts, no sign-up and no payment form. We do not ask you to type personal details to read it.',
-    'If you choose to write to us by email, phone or WhatsApp, we receive whatever you send (for example your name and message). We use it only to reply to you.',
+    'If you use the contact form, or write to us by email, phone or WhatsApp, we receive what you send (for example your name, mobile number, email address and message). We use it only to reply to you.',
     'Donations are paid through your own UPI app or bank. We never see your UPI PIN, card details or banking password.',
   ] },
   { id: 'third', title: 'Third-party services', body: [
-    'To work properly this site loads fonts from Google Fonts and, on the Contact page, a map from Google Maps. Share buttons open WhatsApp or Facebook. These services may receive your IP address and browser details under their own privacy policies.',
+    'The Contact page and footer link to Google Maps and WhatsApp, and share buttons open WhatsApp or Facebook only when you tap them. These services may receive your IP address and browser details under their own privacy policies.',
     'We do not run advertising or tracking cookies on this website.',
   ] },
   { id: 'use', title: 'How we use information', body: [

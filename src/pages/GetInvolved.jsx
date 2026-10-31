@@ -76,10 +76,10 @@ export default function GetInvolved() {
           <h2 id="faces-title"><Split text="Faces of the herd." /></h2>
         </header>
         <div className="gp-collage-grid">
-          <div className="c c1" data-anim="rotate"><ShapePhoto src="/images/gallery-01.jpg" alt="A white cow with a bell" shape="flower" color="#f6a935" /></div>
-          <div className="c c2" data-anim="rotate" style={{ '--d': '120ms' }}><ShapePhoto src="/images/gallery-02.jpg" alt="A calf in the grass" shape="blob" color="#e8704f" /></div>
-          <div className="c c3" data-anim="rotate" style={{ '--d': '240ms' }}><ShapePhoto src="/images/gallery-03.jpg" alt="A brown cow resting" shape="torn" color="#ffd166" /></div>
-          <div className="c c4" data-anim="rotate" style={{ '--d': '360ms' }}><ShapePhoto src="/images/gallery-06.jpg" alt="A calf with a white mark" shape="blobb" color="#f2b98a" /></div>
+          <div className="c c1" data-anim="rotate"><ShapePhoto src="/images/gausevarth gallery21.jpg" alt="A white cow with a bell" shape="portrait" color="#f6a935" /></div>
+          <div className="c c2" data-anim="rotate" style={{ '--d': '120ms' }}><ShapePhoto src="/images/gallery-02.jpg" alt="A calf in the grass" shape="landscape" color="#e8704f" /></div>
+          <div className="c c3" data-anim="rotate" style={{ '--d': '240ms' }}><ShapePhoto src="/images/gallery-03.jpg" alt="A brown cow resting" shape="landscape" color="#ffd166" /></div>
+          <div className="c c4" data-anim="rotate" style={{ '--d': '360ms' }}><ShapePhoto src="/images/gallery-06.jpg" alt="A calf with a white mark" shape="landscape" color="#f2b98a" /></div>
           <Spark className="c-spark s1" /><Spark className="c-spark s2" />
         </div>
       </section>

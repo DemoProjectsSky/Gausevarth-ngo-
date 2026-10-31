@@ -1,6 +1,6 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Heart } from 'lucide-react'
+import { ArrowLeft, Heart, ImagePlus } from 'lucide-react'
 import { useReveal } from '../hooks/useReveal'
 
 /* ---------- page shell: gives every page the same scroll animations ---------- */
@@ -18,6 +18,7 @@ export function Split({ text, as: Tag = 'span', className = '', start = 0 }) {
       {text.split(' ').map((word, wi) => (
         <span className="gs-word" aria-hidden="true" key={wi}>
           {[...word].map((ch, ci) => <span className="gs-ch" key={ci} style={{ '--i': n++ }}>{ch}</span>)}
+          {' '}
         </span>
       ))}
     </Tag>
@@ -134,11 +135,16 @@ export function Shapes() {
   )
 }
 
-export function ShapePhoto({ src, alt = '', shape = 'blob', color = '#f6a935', className = '', style, children }) {
+/* Rectangle / square photo frame.  shape = 'portrait' | 'square' | 'landscape' | 'tall'
+   Photo kisi bhi size ki ho, frame mein apne aap crop ho jaati hai. */
+export function ShapePhoto({ src, alt = '', shape = 'landscape', color = '#f6a935', className = '', style, children }) {
+  const [ok, setOk] = useState(true)
   return (
     <figure className={`gp-sp gp-sp-${shape} ${className}`} style={{ '--sc': color, ...style }}>
       <span className="gp-sp-back" aria-hidden="true" />
-      <span className="gp-sp-clip"><Photo src={src} alt={alt} /></span>
+      <span className="gp-sp-clip">
+        {ok ? <Photo src={src} alt={alt} onError={() => setOk(false)} /> : <span className="gp-sp-empty"><ImagePlus size={26} /><small>Add photo</small></span>}
+      </span>
       {children}
     </figure>
   )
