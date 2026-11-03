@@ -12,18 +12,19 @@ const INK = import.meta.env.DEV
 /* one rectangular / square photo slot. Missing files stay hidden on the live site. */
 function Tile({ p, onOpen, index, onMissing }) {
   const [ok, setOk] = useState(true)
+  const caption = p.cap || p.alt || 'Gaushala photo'
   if (!ok && !INK) return null
   return (
     <figure className={`gp-shot gp-shot-${p.shape}`} style={{ '--d': `${(index % 6) * 70}ms` }}>
       {ok ? (
-        <button type="button" onClick={() => onOpen(index)} aria-label={`Open photo: ${p.cap}`}>
-          <img src={p.src} alt={p.alt || p.cap} onError={() => { setOk(false); onMissing?.(p.src) }} />
+        <button type="button" onClick={() => onOpen(index)} aria-label={`Open photo: ${caption}`}>
+          <img src={p.src} alt={p.alt || caption} onError={() => { setOk(false); onMissing?.(p.src) }} />
           <span className="gp-shot-zoom"><Maximize2 size={18} /></span>
         </button>
       ) : (
         <div className="gp-shot-empty"><ImagePlus size={28} /><b>Add photo</b><small>{p.src.replace('/images/', 'public/images/')}</small></div>
       )}
-      {ok && <figcaption>{p.cap}</figcaption>}
+      {ok && <figcaption>{caption}</figcaption>}
     </figure>
   )
 }
@@ -32,10 +33,10 @@ export default function Gallery() {
   const { approvedPhotos } = foundationContent
   const photos = useMemo(() => [
     ...galleryImages,
-    ...approvedPhotos.map(p => ({ cat: 'More', shape: 'landscape', ...p })),
+    ...approvedPhotos.map(p => ({ shape: 'landscape', ...p, cat: p.cat || 'More' })),
   ], [approvedPhotos])
   const [missing, setMissing] = useState([])
-  const cats = useMemo(() => ['All', ...new Set(photos.map(p => p.cat))], [photos])
+  const cats = useMemo(() => ['All', ...new Set(photos.map(p => p.cat).filter(Boolean))], [photos])
 
   const [cat, setCat] = useState('All')
   const [open, setOpen] = useState(-1)

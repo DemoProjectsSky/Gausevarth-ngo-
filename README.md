@@ -22,5 +22,5 @@ If you are developing a production application, we recommend using TypeScript wi
 - **Gallery photos:** `public/images/` mein file daalo, phir `src/content/galleryImages.js` mein line add/badlo. `shape` = `portrait` / `square` / `landscape` / `tall`. Photo kisi bhi size ki ho, frame mein apne aap crop hoti hai. `gallery-09.jpg` se `gallery-12.jpg` ke slots ready hain (file daalte hi dikhne lagte hain).
 - **Contact / footer details:** `src/content/foundationContent.js` ke `contact` section mein.
 - **Bank / UPI:** `src/content/bank.js`. QR image: `public/images/gausevath ngo qr.jpeg`.
-- **Contact form email:** Vercel env vars `EMAIL_USER`, `EMAIL_PASS`, `CONTACT_TO` set karna zaroori hai.
+- **Contact form email:** Gmail ke liye `EMAIL_USER`, `EMAIL_PASS` (Google App Password), aur `CONTACT_TO` configure karein. Local API test ke liye `.env.example` ko `.env.local` mein copy karke values bharein, phir `npm run dev:api` chalayein. Vercel deployment par yehi variables Project Settings > Environment Variables mein add karein. `.env.local` ko commit na karein.
 - Fonts ab package se aate hain (`npm install` ke baad offline bhi chalte hain).

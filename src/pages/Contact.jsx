@@ -62,11 +62,11 @@ export default function Contact() {
         }),
       })
 
-      const data = await response.json()
+      const data = await response.json().catch(() => null)
 
-      if (!response.ok || !data.success) {
+      if (!response.ok || !data?.success) {
         throw new Error(
-          data.message || 'Unable to send your message.'
+          data?.message || 'The contact service is unavailable. Please try again later.'
         )
       }
 

@@ -273,12 +273,12 @@ const pillars = [
 
 const herd = [
   { cls: 'wide', src: '/images/gausevarth gallery1.png', cap: 'She was here first' },
-  { cls: 'wide', src: '/images/gausevarth gallery2.png', cap: 'Our gentle giant' },
-  { cls: 'square', src: '/images/gausevarth gallery3.png', cap: 'Little one, big eyes' },
-  { cls: 'tall', src: '/images/gausevarth gallery4.png', cap: 'Curious as ever' },
-  { cls: 'wide', src: '/images/gausevarth gallery5.png', cap: 'Fodder for the day' },
-  { cls: 'square', src: '/images/gausevarth gallery6.png', cap: 'Fresh milk, fresh blessings' },
-  { cls: 'wide', src: '/images/gausevarth gallery7.png', cap: 'Nap time' },
+  { cls: 'wide', src: '/images/gausevarth gallery26.png', cap: 'Our gentle giant' },
+  { cls: 'wide', src: '/images/gausevarth gallery27.png', cap: 'Little one, big eyes' },
+  { cls: 'square', src: '/images/gausevarth gallery25.png', cap: 'Curious as ever' },
+  { cls: 'wide', src: '/images/gausevarth gallery19.png', cap: 'Fodder for the day' },
+  { cls: 'square', src: '/images/gausevarth gallery29.jpeg', cap: 'Fresh milk, fresh blessings' },
+  { cls: 'wide', src: '/images/gausevarth gallery28.png', cap: 'Nap time' },
 ]
 
 /* ---------- Donation uses ---------- */

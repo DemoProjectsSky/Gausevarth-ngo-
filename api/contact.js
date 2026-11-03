@@ -18,6 +18,7 @@ export default async function handler(req, res) {
   const reason = clean(req.body?.reason)
   const message = clean(req.body?.message)
 
+  // Validate required fields
   if (!name || !mobile || !reason || !message) {
     return res.status(400).json({
       success: false,
@@ -25,6 +26,7 @@ export default async function handler(req, res) {
     })
   }
 
+  // Validate mobile number
   if (!/^[6-9]\d{9}$/.test(mobile)) {
     return res.status(400).json({
       success: false,
@@ -32,6 +34,7 @@ export default async function handler(req, res) {
     })
   }
 
+  // Validate email
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({
       success: false,
@@ -39,6 +42,7 @@ export default async function handler(req, res) {
     })
   }
 
+  // Allowed inquiry reasons
   const allowedReasons = [
     'Donation',
     'Volunteering',
@@ -55,6 +59,7 @@ export default async function handler(req, res) {
     })
   }
 
+  // Length validation
   if (
     name.length > 100 ||
     mobile.length > 10 ||
@@ -67,6 +72,7 @@ export default async function handler(req, res) {
     })
   }
 
+  // Environment variables
   const EMAIL_USER = process.env.EMAIL_USER
   const EMAIL_PASS = process.env.EMAIL_PASS
   const CONTACT_TO = process.env.CONTACT_TO

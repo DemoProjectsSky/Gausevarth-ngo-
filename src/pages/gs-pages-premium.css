@@ -55,6 +55,168 @@
 /* ============ WHAT WE DO · four ways we care — ivory ============ */
 .gp .gp-work { --paper-ink: #2a1a10; --c3: #b8863b; background: #fbf3e4; }
 
+/* ============ ABOUT · shared inner-page look ============ */
+.gp-about .section {
+  padding-block: clamp(70px, 9vw, 120px);
+  color: #2a1a10;
+}
+.gp-about .about-story,
+.gp-about .about-values,
+.gp-about .about-legal,
+.gp-about .about-gallery { background: #fbf3e4; }
+.gp-about .about-purpose,
+.gp-about .about-journey,
+.gp-about .about-leadership { background: #fffaf0; }
+.gp-about .about-objectives,
+.gp-about .about-readiness { background: #f0e7dc; }
+.gp-about .about-copy-block h2,
+.gp-about .about-two-col h2,
+.gp-about .readiness-grid h2,
+.gp-about .section-heading h2 {
+  color: #3a1b0e;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+}
+.gp-about .about-purpose-card {
+  border: 1px solid rgba(90, 50, 32, .14);
+  border-radius: 24px;
+  color: #2a1a10;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(58, 27, 14, .08);
+}
+.gp-about .about-purpose-card .card-kicker { color: #8a6045; }
+.gp-about .about-purpose-card h3 { color: #3a1b0e; }
+.gp-about .about-purpose-card > p:not(.approval-note) { color: #5b4a3f; }
+.gp-about .about-purpose-card .about-icon {
+  border-color: rgba(90, 50, 32, .22);
+  color: #9a5c2d;
+}
+.gp-about .value-card,
+.gp-about .leader-card {
+  border: 1px solid rgba(90, 50, 32, .12);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(58, 27, 14, .06);
+}
+.gp-about .about-photo-grid img {
+  border-radius: 14px;
+  aspect-ratio: 4 / 3;
+}
+.gp-about .about-gallery-more .btn { border-radius: 999px; }
+.gp-about .about-timeline { border-color: rgba(90, 50, 32, .28); }
+.gp-about .about-timeline h3 { color: #3a1b0e; }
+
+/* ============ ABOUT · distinct section palettes ============ */
+.gp-about .about-story {
+  background:
+    radial-gradient(circle at 92% 18%, rgba(232, 112, 79, .12), transparent 28%),
+    linear-gradient(135deg, #fbf3e4, #fff8e9);
+}
+.gp-about .about-story .section-label { color: #8c2543; }
+.gp-about .about-story .section-label span:first-child { color: #e8704f; }
+.gp-about .about-photos figure { border: 4px solid #fffaf0; box-shadow: 0 10px 0 #e9c87a; }
+.gp-about .about-photos figure:nth-child(2) { box-shadow: 0 10px 0 #9cc9b8; }
+.gp-about .about-photos figure:nth-child(3) { box-shadow: 0 10px 0 #e7a9a0; }
+
+.gp-about .about-purpose {
+  color: #fdf6e3;
+  background:
+    radial-gradient(circle at 92% 5%, rgba(233, 200, 122, .16), transparent 34%),
+    #0f3d33;
+}
+.gp-about .about-purpose .section-heading h2 { color: #fdf6e3; }
+.gp-about .about-purpose .section-heading p { color: rgba(253, 246, 227, .78); }
+.gp-about .about-purpose .eyebrow { color: #e9c87a; }
+.gp-about .about-purpose-card {
+  border: 1px solid rgba(253, 246, 227, .22);
+  border-radius: 12px;
+  background: #185647;
+  box-shadow: 0 12px 0 rgba(5, 28, 23, .28);
+}
+.gp-about .about-purpose-card:nth-child(2) { background: #633044; }
+.gp-about .about-purpose-card .about-icon { color: #f3d17b; background: rgba(255, 255, 255, .08); }
+
+.gp-about .about-values { background: #f8e7e2; }
+.gp-about .about-values .section-heading h2 { color: #3b0f1d; }
+.gp-about .about-values .eyebrow { color: #8c2543; }
+.gp-about .value-card {
+  border-top: 3px solid #8c2543;
+  border-radius: 4px 4px 12px 12px;
+  background: #fffaf0;
+  box-shadow: 0 8px 0 rgba(140, 37, 67, .12);
+}
+.gp-about .value-card:nth-child(2) { border-color: #3f7a57; background: #edf2e8; }
+.gp-about .value-card:nth-child(3) { border-color: #d9823b; background: #fff0d6; }
+.gp-about .value-card:nth-child(4) { border-color: #557a9b; background: #e8eff4; }
+
+.gp-about .about-objectives { background: #e3e9d8; }
+.gp-about .about-objectives .eyebrow { color: #3f7a57; }
+.gp-about .approval-panel {
+  border-color: rgba(29, 58, 43, .2);
+  background: #f8faef;
+  box-shadow: 8px 8px 0 rgba(63, 122, 87, .18);
+}
+
+.gp-about .about-journey {
+  color: #fbeee6;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(232, 180, 160, .16), transparent 36%),
+    #2a1a3a;
+}
+.gp-about .about-journey .section-heading h2 { color: #fbeee6; }
+.gp-about .about-journey .eyebrow { color: #e8b4a0; }
+.gp-about .about-timeline { border-color: rgba(232, 180, 160, .42); }
+.gp-about .about-timeline li::before { background: #e8b4a0; box-shadow: 0 0 0 5px rgba(232, 180, 160, .14); }
+.gp-about .about-timeline time { color: #e8b4a0; }
+.gp-about .about-timeline h3 { color: #fff3dc; }
+.gp-about .about-timeline p { color: rgba(251, 238, 230, .78); }
+
+.gp-about .about-legal {
+  color: #effaf7;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(143, 214, 204, .16), transparent 38%),
+    #0b3b45;
+}
+.gp-about .about-legal h2 { color: #effaf7; }
+.gp-about .about-legal .eyebrow { color: #8fd6cc; }
+.gp-about .about-legal > .container > .about-two-col > div > p { color: rgba(239, 250, 247, .78); }
+.gp-about .about-legal-list { border-color: rgba(239, 250, 247, .28); }
+.gp-about .about-legal-list > div { border-color: rgba(239, 250, 247, .22); }
+.gp-about .about-legal-list dt { color: #8fd6cc; }
+.gp-about .about-legal-list dd { color: #effaf7; }
+
+.gp-about .about-readiness {
+  background: linear-gradient(120deg, #f3e3c3, #f2c9c0);
+}
+.gp-about .about-readiness .eyebrow { color: #8c2543; }
+.gp-about .readiness-items { border-color: rgba(58, 27, 14, .28); }
+.gp-about .readiness-items > div { border-color: rgba(58, 27, 14, .2); }
+.gp-about .readiness-items svg { color: #8c2543; }
+
+.gp-about .about-leadership { background: #edf2e8; }
+.gp-about .about-leadership .eyebrow { color: #3f7a57; }
+.gp-about .leader-card {
+  border-color: rgba(29, 58, 43, .16);
+  border-radius: 12px;
+  background: #fffdf7;
+  box-shadow: 0 10px 0 rgba(63, 122, 87, .16);
+}
+.gp-about .leader-card img { border-radius: 6px; }
+
+.gp-about .about-gallery {
+  background:
+    radial-gradient(circle at 8% 100%, rgba(232, 112, 79, .12), transparent 32%),
+    linear-gradient(135deg, #fff0d6, #f8e7e2);
+}
+.gp-about .about-gallery .eyebrow { color: #8c2543; }
+.gp-about .about-photo-grid img { box-shadow: 0 10px 0 rgba(140, 37, 67, .16); }
+.gp-about .about-gallery-more .btn { background: #3b0f1d; }
+
+@media (max-width: 640px) {
+  .gp-about .about-purpose-grid,
+  .gp-about .values-grid { grid-template-columns: 1fr; }
+}
+
 .gp .gp-row {
   --rc: #e9c87a;
   position: relative;
@@ -141,16 +303,14 @@
 /* ============ GALLERY · clean rectangle / square photo slots ============
    Photo kisi bhi size ki ho, frame ke hisaab se crop hoti hai (object-fit: cover). */
 .gp-gallery { position: relative; overflow: hidden; }
-.gp-gallery::before, .gp-gallery::after { content: ''; position: absolute; z-index: 0; border-radius: 50%; border: 14px solid; pointer-events: none; }
-.gp-gallery::before { left: -70px; top: 28%; width: 190px; height: 190px; border-color: rgba(185, 138, 208, .55); }
-.gp-gallery::after { right: -60px; bottom: 9%; width: 170px; height: 170px; border-color: rgba(240, 195, 107, .75); }
 .gp-gallery > * { position: relative; z-index: 1; }
-.gp-masonry { columns: 3 300px; column-gap: 22px; max-width: 1080px; margin: 0 auto; }
+.gp-masonry { columns: 3 240px; column-gap: 24px; max-width: 1160px; margin: 0 auto; }
 .gp-shot { position: relative; break-inside: avoid; margin: 0 0 22px; overflow: hidden; border-radius: 10px; background: rgba(251, 238, 230, .08); box-shadow: 0 14px 30px rgba(10, 4, 20, .35); animation: gpPop .6s ease var(--d, 0ms) both; }
 @keyframes gpPop { from { opacity: 0; transform: translateY(24px); } }
 .gp-shot-portrait { aspect-ratio: 3 / 4; }
 .gp-shot-square { aspect-ratio: 1 / 1; }
 .gp-shot-landscape { aspect-ratio: 4 / 3; }
+.gp-shot-rectangle { aspect-ratio: 4 / 3; }
 .gp-shot-tall { aspect-ratio: 2 / 3; }
 .gp-shot button { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
 .gp-shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }

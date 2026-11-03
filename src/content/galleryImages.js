@@ -23,8 +23,16 @@ export const galleryImages = [
   // ---- naye slots: file daalte hi dikhne lagenge ----
   { src: '/images/gausevarth gallery9.png', shape: 'tall',   alt: 'Cow at the gaushala' },
   { src: '/images/gausevarth gallery10.jpg', shape: 'landscape',  alt: 'Cows at the gaushala' },
-  { src: '/images/gausevarth gallery11.jpg', shape: 'square',    alt: 'Calf at the gaushala' },
-  { src: '/images/gausevarth gallery12.jpg', shape: 'tall',    alt: 'Cow at the gaushala' },
+  { src: '/images/gausevarth gallery11.jpg', shape: 'rectangle',    alt: 'Calf at the gaushala' },
+  { src: '/images/gausevarth gallery12.jpg', shape: 'square',    alt: 'Cow at the gaushala' },
+  { src: '/images/gausevarth gallery28.png', shape: 'tall',    alt: 'Cow at the gaushala' },
+  { src: '/images/gausevarth gallery29.jpeg', shape: 'portrait',    alt: 'Cow at the gaushala' },
+  { src: '/images/gausevarth gallery26.png', shape: 'tall',    alt: 'Cow at the gaushala' },
+  { src: '/images/gausevarth gallery27.png', shape: 'tall',    alt: 'Cow at the gaushala' },
+  { src: '/images/gausevarth gallery25.png', shape: 'tall',    alt: 'Cow at the gaushala' },
+ 
 ]
 
-export const SHAPE_RATIO = { portrait: 3 / 4, square: 1, landscape: 4 / 3, tall: 2 / 3 }
+
+
+export const SHAPE_RATIO = { portrait: 4 / 5, square: 1, landscape: 4 / 3, tall: 2 / 3 }

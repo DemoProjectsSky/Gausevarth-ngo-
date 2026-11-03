@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, CheckCircle2, Eye, FileText, HeartHandshake, ShieldCheck, UsersRound } from 'lucide-react'
 import { foundationContent } from '../content/foundationContent'
+import { galleryImages } from '../content/galleryImages'
+import { CtaBand, Page, PageHero } from '../components/Shared'
+import './gs-pages.css'
+import './gs-pages-premium.css'
 
 const valueIcons = [ShieldCheck, HeartHandshake, CheckCircle2, UsersRound]
 
@@ -26,25 +30,12 @@ export default function AboutUs() {
     values, objectives, milestones, leadership, founders } = foundationContent
 
   return (
-    <div className="about-page">
-      <nav className="breadcrumb container" aria-label="Breadcrumb">
-        <Link to="/">Home</Link><span aria-hidden="true">/</span><span aria-current="page">About Us</span>
-      </nav>
-
-      <header className="about-hero">
-        <div className="container about-hero-grid">
-          <div className="about-hero-copy">
-            <span className="eyebrow">About the Foundation</span>
-            <h1>About Our Foundation</h1>
-            <p className="about-hero-subtitle">Working Together for a Better Tomorrow</p>
-            <p>Gau Sevarth is a Section 8 non-profit company in Bap, Jodhpur, Rajasthan, caring for cows with fodder, clean water, medical treatment and shelter. Know who we are, what we do and how you can walk with us.</p>
-          </div>
-          <figure className="about-hero-card">
-            <div className="about-hero-image"><img src="/images/gausevarth.logo.jpeg" alt={`${officialName} official logo`} /></div>
-            <figcaption>Official foundation identity</figcaption>
-          </figure>
-        </div>
-      </header>
+    <Page theme="day" className="gp-about">
+      <PageHero
+        kicker="About Us"
+        title="About Our Foundation"
+        lead="Gau Sevarth is a Section 8 non-profit company in Bap, Jodhpur, Rajasthan, caring for cows with fodder, clean water, medical treatment and shelter. Know who we are, what we do and how you can walk with us."
+      />
 
       <div>
         <section className="section about-story" aria-labelledby="story-title">
@@ -54,9 +45,9 @@ export default function AboutUs() {
               <h2 id="story-title">Seva for every cow, every day.</h2>
               <p>{story}</p>
               <div className="about-photos">
-                <figure className="ap-a"><img src="/images/about-who-1.jpg" alt="Cows resting at the gaushala" /></figure>
-                <figure className="ap-b"><img src="/images/about-who-2.jpg" alt="A calf at the gaushala" /></figure>
-                <figure className="ap-c"><img src="/images/about-herd-1.jpg" alt="The herd at Gau Sevarth" /></figure>
+                <figure className="ap-a"><img src="/images/gausevarth gallery30.jpg" alt="Cows resting at the gaushala" /></figure>
+                <figure className="ap-b"><img src="/images/gausevarth gallery31.jpg" alt="A calf at the gaushala" /></figure>
+                <figure className="ap-c"><img src="/images/gausevarth gallery32.jpg" alt="The herd at Gau Sevarth" /></figure>
               </div>
             </Reveal>
           </div>
@@ -100,10 +91,15 @@ export default function AboutUs() {
 
         <section className="section about-leadership" aria-labelledby="leadership-title"><div className="container"><div className="section-heading about-heading"><span className="eyebrow">Leadership</span><h2 id="leadership-title">People behind the Foundation.</h2><p>The two founders who started Gau Sevarth with one belief: no cow should go without care.</p></div>{founders.length ? <div className="leadership-grid">{founders.map((person, index) => <article className="leader-card" key={person.image}><img src={person.image} alt={person.imageAlt} loading="lazy" /><h3>{person.name || `Founder ${index + 1}`}</h3><p>{person.role}, Gau Sevarth</p></article>)}</div> : leadership.length ? <div className="leadership-grid">{leadership.map(person => <article className="leader-card" key={person.name}>{person.photo && <img src={person.photo} alt={person.photoAlt || `${person.name} profile`} />}<h3>{person.name}</h3><p>{person.designation}</p><small>{person.bio}</small></article>)}</div> : <div className="leadership-empty"><UsersRound aria-hidden="true" /><span>Approved leadership profiles are not yet available for publication.</span></div>}</div></section>
 
-        <section className="section about-gallery" aria-labelledby="gallery-title"><div className="container"><div className="section-heading about-heading"><span className="eyebrow">Gallery</span><h2 id="gallery-title">A glimpse of the herd.</h2><p>More photos are in the full gallery.</p></div><div className="about-photo-grid">{[1,2,3,4,5,6,7,8].slice(0, 6).map(n => <img key={n} src={`/images/gallery-0${n}.jpg`} alt="Cows and calves at the gaushala" loading="lazy" />)}</div><div className="about-gallery-more"><Link to="/gallery" className="btn btn-primary">Open full gallery <ArrowUpRight size={17} /></Link></div></div></section>
+        <section className="section about-gallery" aria-labelledby="gallery-title"><div className="container"><div className="section-heading about-heading"><span className="eyebrow">Gallery</span><h2 id="gallery-title">A glimpse of the herd.</h2><p>More photos are in the full gallery.</p></div><div className="about-photo-grid">{galleryImages.slice(0, 6).map(photo => <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" />)}</div><div className="about-gallery-more"><Link to="/gallery" className="btn btn-primary">Open full gallery <ArrowUpRight size={17} /></Link></div></div></section>
 
-        <section className="about-cta" aria-labelledby="cta-title"><div className="container about-cta-inner"><div><span className="eyebrow">Stay connected</span><h2 id="cta-title">Be Part of Our Journey</h2><p>Support the cows with a donation, give some time as a volunteer, or simply say hello.</p></div><div className="btn-row"><Link to="/our-work" className="btn btn-light">Our Work <ArrowUpRight size={17} /></Link><Link to="/contact" className="btn btn-outline-light">Contact Us <ArrowUpRight size={17} /></Link></div></div></section>
+        <CtaBand
+          title="Be part of our journey."
+          text="Support the cows with a donation, give some time as a volunteer, or simply say hello."
+          primary={{ to: '/donate', label: 'Donate now' }}
+          secondary={{ to: '/our-work', label: 'Our work' }}
+        />
       </div>
-    </div>
+    </Page>
   )
 }
