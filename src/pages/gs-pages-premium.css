@@ -22,17 +22,15 @@
 .gp .gp-hero {
   display: grid;
   align-items: center;
-  min-height: 100svh;
+  min-height: 50svh;
   background: #3a1b0e;
-  padding: clamp(150px, 15vh, 190px) 0 clamp(70px, 9vh, 100px);
+  padding: clamp(150px, 15vh, 190px) 0 clamp(24px, 4vh, 44px);
 }
 .gp .gp-hero .gp-wave { display: none; }
 .gp .gp-hero-inner { gap: 0; }
 
 /* pill shows only the current page name, e.g. "What We Do" */
-.gp .gp-crumbs { padding: 14px 30px; border-radius: 10px; background: rgba(255, 243, 220, .16); backdrop-filter: none; }
-.gp .gp-crumbs a, .gp .gp-crumbs > span { display: none; }
-.gp .gp-crumbs b { color: #fff3dc; font-weight: 500; }
+.gp .gp-crumbs { display: none; }
 
 /* one medium title, no extra text under it */
 .gp .gp-hero h1 {
@@ -115,8 +113,9 @@
     radial-gradient(circle at 92% 18%, rgba(232, 112, 79, .12), transparent 28%),
     linear-gradient(135deg, #fbf3e4, #fff8e9);
 }
-.gp-about .about-story .section-label { color: #8c2543; }
-.gp-about .about-story .section-label span:first-child { color: #e8704f; }
+.gp-about .about-story .section-label { color: #8c2543; font-size: 14px; font-weight: 800; letter-spacing: .12em; }
+.gp-about .about-story .section-label span:first-child { color: #e8704f; font-size: 30px; font-weight: 700; }
+.gp-about .about-story .section-label span:last-child { font-weight: 800; }
 .gp-about .about-photos figure { border: 4px solid #fffaf0; box-shadow: 0 10px 0 #e9c87a; }
 .gp-about .about-photos figure:nth-child(2) { box-shadow: 0 10px 0 #9cc9b8; }
 .gp-about .about-photos figure:nth-child(3) { box-shadow: 0 10px 0 #e7a9a0; }
@@ -147,6 +146,10 @@
   border-radius: 4px 4px 12px 12px;
   background: #fffaf0;
   box-shadow: 0 8px 0 rgba(140, 37, 67, .12);
+}
+.gp-about .value-card h3 {
+  font-weight: 800;
+  letter-spacing: -.02em;
 }
 .gp-about .value-card:nth-child(2) { border-color: #3f7a57; background: #edf2e8; }
 .gp-about .value-card:nth-child(3) { border-color: #d9823b; background: #fff0d6; }

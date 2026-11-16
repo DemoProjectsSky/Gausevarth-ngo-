@@ -45,9 +45,9 @@
   position: relative;
   display: grid;
   align-items: center;
-  min-height: 100svh;
+  min-height: 50svh;
   overflow: hidden;
-  padding: clamp(150px, 15vh, 190px) 0 clamp(80px, 10vh, 120px);
+  padding: clamp(150px, 15vh, 190px) 0 clamp(24px, 4vh, 44px);
   color: var(--gd-cream);
   background:
     radial-gradient(circle at 12% 18%, rgba(255, 207, 92, .24), transparent 40%),
@@ -123,6 +123,7 @@ main > .gd-page:first-child { margin-top: -114px; }
 }
 
 .gd-kicker {
+  display: none;
   justify-self: start;
   padding: 6px 16px;
   border-radius: 999px;

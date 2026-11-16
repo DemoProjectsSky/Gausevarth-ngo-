@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  ArrowUpRight, Check, Copy, Download, Droplets, Heart, Mail, MapPin, MessageCircle, Phone,
+  ArrowUpRight, Check, ChevronLeft, ChevronRight, Copy, Download, Droplets, Heart, Mail, MapPin, MessageCircle, Phone,
   Play, ScanLine, Smartphone, Stethoscope, Wheat, Warehouse,
 } from 'lucide-react'
 import { foundationContent } from '../content/foundationContent'
@@ -207,28 +207,8 @@ function VideoStory({ video }) {
               aria-disabled={!ready}
               disabled={!ready}
             >
-              <svg viewBox="0 0 200 200" aria-hidden="true">
-                <defs>
-                  <path
-                    id="gs-watch"
-                    d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"
-                  />
-                </defs>
-                <text>
-                  <textPath
-                    href="#gs-watch"
-                    textLength="478"
-                    lengthAdjust="spacing"
-                  >
-                    WATCH · OUR · STORY · WATCH · OUR · STORY ·
-                  </textPath>
-                </text>
-              </svg>
-
               <Play size={34} fill="currentColor" />
             </button>
-
-            <span className="gs-vtag">{video.title}</span>
 
             {!ready && (
               <span className="gs-vsoon">Video coming soon</span>
@@ -357,6 +337,8 @@ function DonationCard() {
 
 export default function Home() {
   const root = useRef(null)
+  const herdTrack = useRef(null)
+  const [galleryPosition, setGalleryPosition] = useState({ offset: 0, max: 0 })
 
   const {
     officialName,
@@ -385,6 +367,28 @@ export default function Home() {
   }
 
   const place = registeredRecordLocation.replace(' - ', ', ')
+
+  useEffect(() => {
+    const track = herdTrack.current
+    const viewport = track?.parentElement
+    if (!track || !viewport) return undefined
+
+    const measure = () => {
+      const max = Math.max(0, track.scrollWidth - viewport.clientWidth)
+      setGalleryPosition(current => ({ max, offset: Math.min(current.offset, max) }))
+    }
+
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [])
+
+  const moveGallery = direction => {
+    setGalleryPosition(current => ({
+      ...current,
+      offset: Math.min(current.max, Math.max(0, current.offset + direction * Math.max(260, window.innerWidth * .75))),
+    }))
+  }
 
   /* ---------- reveal on scroll ---------- */
 
@@ -423,7 +427,6 @@ export default function Home() {
     }
 
     const progs = [...el.querySelectorAll('[data-prog]')]
-    const stickies = [...el.querySelectorAll('[data-sticky]')]
     const pillarEls = [...el.querySelectorAll('.gs-pillar')]
     const bar = el.querySelector('.gs-progress i')
 
@@ -443,22 +446,6 @@ export default function Home() {
           '--p',
           clamp((vh - r.top) / (vh + r.height)).toFixed(4)
         )
-      })
-
-      stickies.forEach(s => {
-        const r = s.getBoundingClientRect()
-        const sp = clamp(-r.top / Math.max(1, r.height - vh))
-
-        s.style.setProperty('--sp', sp.toFixed(4))
-
-        const track = s.querySelector('[data-track]')
-
-        if (track && !reduce) {
-          const max = Math.max(0, track.scrollWidth - window.innerWidth)
-
-          track.style.transform =
-            `translate3d(${(-sp * max).toFixed(1)}px,0,0)`
-        }
       })
 
       if (!reduce) {
@@ -805,17 +792,20 @@ export default function Home() {
       <section
         id="gallery"
         className="gs-herd"
-        data-sticky
         aria-labelledby="herd-title"
       >
         <div id="herd" className="gs-herd-pin">
-          <div className="gs-herd-track" data-track>
+          <div
+            id="herd-gallery-track"
+            className="gs-herd-track"
+            ref={herdTrack}
+            style={{ transform: `translate3d(-${galleryPosition.offset}px, 0, 0)` }}
+          >
 
             <div className="gs-herd-intro">
               <span className="gs-kicker">The gallery</span>
               <h2 id="herd-title">Meet the <em>herd</em></h2>
-              <p>Keep scrolling, they love company.</p>
-              <div className="gs-herd-arrow" aria-hidden="true">→</div>
+              <p>Take a closer look at our herd.</p>
             </div>
 
             {herd.map((h, i) => (
@@ -844,8 +834,29 @@ export default function Home() {
             </div>
           </div>
 
+          <div className="gs-herd-controls" aria-label="Gallery controls">
+            <button
+              type="button"
+              aria-label="Previous gallery photos"
+              aria-controls="herd-gallery-track"
+              disabled={galleryPosition.offset <= 0}
+              onClick={() => moveGallery(-1)}
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <button
+              type="button"
+              aria-label="Next gallery photos"
+              aria-controls="herd-gallery-track"
+              disabled={galleryPosition.offset >= galleryPosition.max}
+              onClick={() => moveGallery(1)}
+            >
+              <ChevronRight size={22} />
+            </button>
+          </div>
+
           <div className="gs-herd-meter" aria-hidden="true">
-            <i />
+            <i style={{ transform: `scaleX(${galleryPosition.max ? galleryPosition.offset / galleryPosition.max : 0})` }} />
           </div>
         </div>
       </section>

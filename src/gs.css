@@ -5,7 +5,8 @@
    ========================================================== */
 
 .gs { --display: 'Anton', 'Impact', 'Arial Narrow', sans-serif; overflow-x: clip; }
-.gs h1, .gs h2, .gs h3 { font-weight: 400; }
+.gs h1, .gs h2, .gs h3 { font-weight: 700; }
+.gs .gs-split, .gs .gs-word, .gs .gs-ch { line-height: 1.08; overflow: visible; }
 .gs em { font-style: italic; }
 
 /* ---------- animation primitives ---------- */
@@ -119,31 +120,33 @@
 .gs-pillar-no { font-family: 'Syne', sans-serif; font-size: clamp(60px, 8vw, 120px); font-weight: 800; line-height: .8; opacity: .95; -webkit-text-stroke: 2px var(--fg); color: transparent; }
 .gs-pillar-body small { display: inline-block; padding: 5px 12px; border: 1.5px solid currentColor; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
 .gs-pillar-body h3 { margin: 16px 0 14px; font-family: 'Syne', sans-serif; font-size: clamp(30px, 4.4vw, 62px); overflow-wrap: anywhere; font-weight: 800; letter-spacing: -.03em; line-height: .98; }
+.gs-pillar-sanrakshan .gs-pillar-body h3 { font-size: clamp(24px, 3.4vw, 46px); white-space: nowrap; overflow-wrap: normal; }
 .gs-pillar-body p { max-width: 430px; font-family: 'Space Grotesk', sans-serif; font-size: 17px; line-height: 1.65; opacity: .92; }
 .gs-pillar-img { align-self: stretch; min-height: 260px; border-radius: 14px; }
 
 /* ==========================================================
    4 · HERD — horizontal scroll · midnight + lilac · Caveat
    ========================================================== */
-.gs-herd { --bg: #14123b; --lilac: #b8a1ff; --peach: #ffb4a2; height: 420vh; color: #f3efff; background: var(--bg); }
-.gs-herd-pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; align-items: center; background: radial-gradient(circle at 15% 20%, rgba(184, 161, 255, .22), transparent 40%), radial-gradient(circle at 85% 85%, rgba(255, 180, 162, .16), transparent 45%), var(--bg); }
-.gs-herd-track { display: flex; align-items: center; gap: clamp(28px, 5vw, 80px); width: max-content; padding: 70px max(24px, 6vw) 0 max(24px, 6vw); will-change: transform; }
+.gs-herd { --bg: #14123b; --lilac: #b8a1ff; --peach: #ffb4a2; height: auto; color: #f3efff; background: var(--bg); }
+.gs-herd-pin { position: relative; min-height: 100svh; overflow: hidden; display: flex; align-items: center; padding: 80px 0 90px; background: radial-gradient(circle at 15% 20%, rgba(184, 161, 255, .22), transparent 40%), radial-gradient(circle at 85% 85%, rgba(255, 180, 162, .16), transparent 45%), var(--bg); }
+.gs-herd-track { display: flex; align-items: center; gap: clamp(28px, 5vw, 80px); width: max-content; padding: 20px max(24px, 6vw) 0; will-change: transform; transition: transform .55s cubic-bezier(.2, .7, .2, 1); }
+.gs-herd-controls { position: absolute; z-index: 4; top: 20px; right: max(24px, 6vw); display: flex; gap: 10px; }
+.gs-herd-controls button { display: grid; width: 48px; aspect-ratio: 1; place-items: center; border: 1px solid rgba(243, 239, 255, .38); border-radius: 50%; color: #f3efff; background: rgba(243, 239, 255, .08); cursor: pointer; transition: color .2s ease, background .2s ease, border-color .2s ease; }
+.gs-herd-controls button:hover:not(:disabled) { border-color: var(--peach); color: #14123b; background: var(--peach); }
+.gs-herd-controls button:disabled { opacity: .35; cursor: default; }
 .gs-herd-intro { flex: 0 0 auto; width: min(560px, 82vw); display: grid; gap: 14px; }
 .gs-herd-intro .gs-kicker { color: var(--lilac); }
 .gs-herd-intro h2 { font-family: 'Fraunces Variable', 'Fraunces', serif; font-size: clamp(56px, 10vw, 150px); font-weight: 700; line-height: .9; letter-spacing: -.04em; }
 .gs-herd-intro h2 em { color: var(--peach); font-weight: 400; }
 .gs-herd-intro p { font-family: 'Caveat', cursive; font-size: clamp(26px, 3vw, 38px); color: var(--lilac); }
-.gs-herd-arrow { font-size: 60px; color: var(--peach); animation: gsNudge 1.4s ease-in-out infinite; }
-@keyframes gsNudge { 50% { transform: translateX(18px); } }
 .gs-shot { position: relative; flex: 0 0 auto; margin: 0; transform: rotate(var(--r)); transition: transform .5s cubic-bezier(.3, 1.5, .5, 1); }
 .gs-shot:hover { transform: rotate(0) scale(1.04); z-index: 3; }
 .gs-shot .gs-crop { border-radius: 10px; box-shadow: 0 30px 60px rgba(0, 0, 0, .45); }
 .gs-shot figcaption { position: absolute; left: 14px; bottom: -22px; padding: 4px 16px 6px; border-radius: 10px; color: #14123b; background: var(--peach); font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; line-height: 1.1; transform: rotate(-2deg); }
 .gs-shot:nth-of-type(even) figcaption { background: var(--lilac); }
 .gs-shot-tall { width: clamp(220px, 24vw, 340px); height: clamp(330px, 58vh, 540px); }
-.gs-shot-wide { width: clamp(300px, 40vw, 600px); height: clamp(210px, 38vh, 360px); }
+.gs-shot-wide, .gs-shot-square { width: clamp(300px, 40vw, 600px); height: auto; aspect-ratio: 16 / 9; }
 .gs-shot-round { width: clamp(240px, 30vw, 420px); height: clamp(240px, 30vw, 420px); max-height: 56vh; max-width: 56vh; }
-.gs-shot-square { width: clamp(240px, 28vw, 400px); height: clamp(240px, 28vw, 400px); max-height: 54vh; max-width: 54vh; }
 .gs-shot-arch { width: clamp(220px, 25vw, 360px); height: clamp(320px, 56vh, 520px); }
 .gs-shot > .gs-crop { width: 100%; height: 100%; }
 .gs-herd-end { flex: 0 0 auto; display: grid; gap: 18px; justify-items: start; width: min(380px, 80vw); font-family: 'Caveat', cursive; font-size: clamp(34px, 4vw, 54px); line-height: 1; color: var(--peach); }
@@ -321,7 +324,6 @@
   .gs-pillar-body p { font-size: 15px; line-height: 1.5; }
   .gs-pillar-img { height: 120px; min-height: 0; }
   .gs-pillar-body { grid-column: 2; }
-  .gs-herd { height: 360vh; }
   .gs-shot figcaption { font-size: 24px; }
   .gs-founders::before { width: 280px; height: 280px; }
   .gs-polaroids { gap: 10px; }
@@ -341,9 +343,6 @@
 @media (prefers-reduced-motion: reduce) {
   .gs *, .gs *::before, .gs *::after { animation: none !important; transition-duration: .01ms !important; }
   [data-anim], .gs-ch { opacity: 1 !important; transform: none !important; clip-path: none !important; }
-  .gs-herd { height: auto; }
-  .gs-herd-pin { position: relative; height: auto; padding: 80px 0; }
-  .gs-herd-track { width: auto; overflow-x: auto; }
 }
 
 .gs-footer-contact a { display: inline-flex; align-items: flex-start; gap: 10px; line-height: 1.45; overflow-wrap: anywhere; }
@@ -353,6 +352,8 @@
 
 /* real photos inside the Home crops */
 .gs-crop-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2, .7, .2, 1); }
+.gs-shot .gs-crop-img img { object-fit: contain; }
+.gs-shot .gs-crop-img:hover img { transform: none; }
 .gs-crop-img:hover img { transform: scale(1.06); }
 .gs-crop-img:hover { transform: none; }
 /* Home donate: QR card */
