@@ -245,25 +245,6 @@
   animation: gsDrift 9s ease-in-out infinite;
 }
 
-.gs .gs-story-blobs .b1 {
-  left: 3%;
-  top: 9%;
-  width: 130px;
-  height: 130px;
-  border: 16px solid var(--sun);
-  translate: 0 calc((var(--p, .5) - .5) * -90px);
-}
-
-.gs .gs-story-blobs .b2 {
-  right: 6%;
-  top: 14%;
-  width: 74px;
-  height: 74px;
-  background: var(--coral);
-  animation-delay: -3s;
-  translate: 0 calc((var(--p, .5) - .5) * 70px);
-}
-
 .gs .gs-story-blobs .b3 {
   left: 46%;
   bottom: 7%;
@@ -745,6 +726,11 @@
 /* Donate button */
 .gs-footer .gs-footer-give {
   background: var(--gs-gold) !important;
+  color: var(--gs-brown-deep) !important;
+}
+
+.gs-footer .gs-footer-give:hover,
+.gs-footer .gs-footer-give:focus-visible {
   color: var(--gs-brown-deep) !important;
 }
 

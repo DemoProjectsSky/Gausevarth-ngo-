@@ -322,7 +322,13 @@
 }
 
 /* The inner-page hero slides up underneath the floating navbar. */
-main > .gp > .gp-hero:first-child, main > .gp > .gp-404:first-child { margin-top: -92px; }
+main > .gp > .gp-hero:first-child, main > .gp > .gp-404:first-child { margin-top: -114px; }
+@media (max-width: 900px) {
+  main > .gp > .gp-hero:first-child, main > .gp > .gp-404:first-child { margin-top: -102px; }
+}
+@media (max-width: 640px) {
+  main > .gp > .gp-hero:first-child, main > .gp > .gp-404:first-child { margin-top: -90px; }
+}
 
 /* ---------- Home additions ---------- */
 .gs-hero-floaters { z-index: -1; --hero-ink: #fff3dc; --c2: #f6a935; --c3: #ff6b5b; }

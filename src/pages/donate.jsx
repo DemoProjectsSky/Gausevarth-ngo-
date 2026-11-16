@@ -53,7 +53,7 @@ export default function Donate() {
       {/* ───── HEADER ───── */}
       <section className="gd-hero" aria-labelledby="gd-title">
         <div className="gd-blobs" aria-hidden="true">
-          <i className="b1" /><i className="b2" /><i className="b3" /><i className="b4" />
+          <i className="b3" />
         </div>
         <div className="gd-hearts" aria-hidden="true">
           {HEARTS.map((h, i) => (

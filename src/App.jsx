@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { FaWhatsapp } from 'react-icons/fa'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import { foundationContent } from './content/foundationContent'
 import Home from './pages/Home'
 import AboutUs from './pages/AboutUs'
 import Initiatives from './pages/Initiatives'
@@ -35,6 +37,16 @@ export default function App() {
     <BrowserRouter>
       <ScrollTop />
       <Navbar />
+      <a
+        className="whatsapp-fab"
+        href={`https://wa.me/${foundationContent.contact.whatsapp}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with Gau Sevarth on WhatsApp"
+        title="Chat with us on WhatsApp"
+      >
+        <FaWhatsapp className="whatsapp-fab-icon" size={34} aria-hidden="true" />
+      </a>
       <main id="main">
         <Routes>
           <Route path="/" element={<Home />} />

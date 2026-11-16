@@ -43,13 +43,24 @@
 /* ============ HERO / HEADER ============ */
 .gd-hero {
   position: relative;
+  display: grid;
+  align-items: center;
+  min-height: 100svh;
   overflow: hidden;
-  padding: clamp(34px, 6vh, 64px) 0 clamp(120px, 15vw, 190px);
+  padding: clamp(150px, 15vh, 190px) 0 clamp(80px, 10vh, 120px);
   color: var(--gd-cream);
   background:
     radial-gradient(circle at 12% 18%, rgba(255, 207, 92, .24), transparent 40%),
     radial-gradient(circle at 92% 86%, rgba(217, 72, 43, .32), transparent 46%),
     linear-gradient(135deg, #3a1b0e 0%, #5a3220 58%, #6e3a1f 100%);
+}
+
+main > .gd-page:first-child { margin-top: -114px; }
+@media (max-width: 900px) {
+  main > .gd-page:first-child { margin-top: -102px; }
+}
+@media (max-width: 640px) {
+  main > .gd-page:first-child { margin-top: -90px; }
 }
 
 /* scalloped lower edge */
@@ -70,14 +81,9 @@
   pointer-events: none;
   animation: gdDrift 9s ease-in-out infinite;
 }
-.gd-blobs .b1 { left: 4%; top: 12%; width: 120px; height: 120px; border: 15px solid var(--gd-gold); border-radius: 50%; opacity: .9; }
-.gd-blobs .b2 { right: 8%; top: 16%; width: 70px; height: 70px; border-radius: 50%; background: var(--gd-red); animation-delay: -3s; }
 .gd-blobs .b3 { left: 44%; bottom: 20%; width: 96px; height: 96px; border-radius: 22px; background: radial-gradient(circle, var(--gd-gold) 3px, transparent 3.5px) 0 0 / 16px 16px; animation-delay: -5s; opacity: .8; }
-.gd-blobs .b4 { right: 3%; bottom: 26%; width: 150px; height: 150px; border: 3px dashed rgba(255, 207, 92, .55); border-radius: 50%; animation: gdSpin 30s linear infinite; }
 
 @keyframes gdDrift { 50% { transform: translateY(-18px) rotate(8deg); } }
-@keyframes gdSpin { to { transform: rotate(360deg); } }
-
 /* rising hearts */
 .gd-hearts { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .gd-heart {
@@ -452,13 +458,11 @@
   .gd-steps { grid-template-columns: 1fr; }
   .gd-qr-card { box-shadow: 9px 9px 0 var(--gd-gold); }
   .gd-bank-card { box-shadow: 9px 9px 0 var(--gd-orange); }
-  .gd-blobs .b4 { display: none; }
 }
 
 @media (max-width: 520px) {
   .gd-row { flex-direction: column; align-items: stretch; }
   .gd-row button { justify-content: center; }
-  .gd-blobs .b1 { width: 80px; height: 80px; border-width: 11px; }
 }
 
 /* ---------- reduced motion ---------- */

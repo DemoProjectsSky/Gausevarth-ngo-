@@ -20,8 +20,11 @@
    (applies to every inner-page hero; to limit it to some pages, prefix the
    selectors with  .gp-hero:has(~ .gp-work)  etc.)                              */
 .gp .gp-hero {
+  display: grid;
+  align-items: center;
+  min-height: 100svh;
   background: #3a1b0e;
-  padding: 128px 0 clamp(60px, 7vw, 90px);
+  padding: clamp(150px, 15vh, 190px) 0 clamp(70px, 9vh, 100px);
 }
 .gp .gp-hero .gp-wave { display: none; }
 .gp .gp-hero-inner { gap: 0; }
@@ -80,13 +83,13 @@
 .gp-about .about-purpose-card {
   border: 1px solid rgba(90, 50, 32, .14);
   border-radius: 24px;
-  color: #2a1a10;
+  color: #fff;
   background: #fff;
   box-shadow: 0 12px 30px rgba(58, 27, 14, .08);
 }
-.gp-about .about-purpose-card .card-kicker { color: #8a6045; }
-.gp-about .about-purpose-card h3 { color: #3a1b0e; }
-.gp-about .about-purpose-card > p:not(.approval-note) { color: #5b4a3f; }
+.gp-about .about-purpose-card .card-kicker { color: #fff; }
+.gp-about .about-purpose-card h3 { color: #fff; }
+.gp-about .about-purpose-card > p:not(.approval-note) { color: #fff; }
 .gp-about .about-purpose-card .about-icon {
   border-color: rgba(90, 50, 32, .22);
   color: #9a5c2d;
@@ -324,3 +327,20 @@
 .gp-shot-empty small { font-size: 12px; opacity: .7; overflow-wrap: anywhere; }
 .gp-note { font-family: 'Space Grotesk', sans-serif !important; font-size: 15px !important; opacity: .8; }
 @media (max-width: 640px) { .gp-masonry { columns: 2 140px; column-gap: 12px; } .gp-shot { margin-bottom: 12px; } }
+
+@media (max-width: 640px) {
+  .gp-about .section { padding-block: 52px; }
+  .gp-about .about-story-grid,
+  .gp-about .about-two-col,
+  .gp-about .readiness-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .gp-about .about-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .gp-about .about-photos figure:last-child { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+  .gp-about .about-photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gp-about .leadership-grid { grid-template-columns: minmax(0, 1fr); }
+  .gp-about .about-timeline li { grid-template-columns: minmax(0, 1fr); gap: 5px; padding-left: 20px; }
+  .gp-about .about-timeline li > div { min-width: 0; overflow-wrap: anywhere; }
+  .gp-about .about-purpose-card { min-height: 0; padding: 24px; }
+  .gp-about .about-purpose-card .card-kicker,
+  .gp-about .about-purpose-card h3,
+  .gp-about .about-purpose-card > p:not(.approval-note) { color: #fff; }
+}
