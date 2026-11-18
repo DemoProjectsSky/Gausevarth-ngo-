@@ -1,0 +1,71 @@
+export const foundationContent = {
+  officialName: 'GAUSEVARATHA SWAYAM SEVAK CHARITABLE FOUNDATION',
+  incorporatedOn: '23 February 2024',
+  incorporationYear: '2024',
+  organisationType: 'Section 8 company',
+  governingLaw: 'Companies Act, 2013',
+  cin: 'U96092RJ2024NPL092889',
+  section8LicenceNumber: '154081',
+  registeredRecordLocation: 'Bap, Jodhpur, Rajasthan - 342307',
+  legalClarification: 'The incorporation date records the company\'s legal formation. It does not confirm when charitable activities began. Section 8 status and its licence do not, by themselves, establish tax-exemption approval.',
+  story: 'GAUSEVARATHA SWAYAM SEVAK CHARITABLE FOUNDATION, known as Gau Sevarth, is a Section 8 non-profit company incorporated on 23 February 2024 and based in Bap, Jodhpur, Rajasthan. The Foundation works for the care of cows, especially those that are sick, injured, weak or left without anyone to look after them. Every day the work is simple and steady: fresh fodder, clean water, proper treatment and a safe, shaded place to rest. We run on the kindness of donors and volunteers, and we try to keep everything open and honest.',
+  missionStatement: 'To protect and care for cows through daily seva with fodder, clean water, medical treatment and a safe shelter, and to bring people together in the spirit of compassion for every living being.',
+  visionStatement: 'A society where no cow is left hungry, hurt or homeless, and where kindness towards all living beings is part of everyday life.',
+  values: [
+    { title: 'Integrity', description: 'We communicate honestly and act with care in every responsibility entrusted to us.' },
+    { title: 'Responsible service', description: 'We listen first, work thoughtfully and keep the dignity of people at the centre.' },
+    { title: 'Accountability', description: 'We aim to be transparent about what is verified, what is planned and what is still pending.' },
+    { title: 'Community engagement', description: 'We believe meaningful progress begins with people working together with respect.' },
+  ],
+  founders: [
+    { name: 'Praksh Kumawat', role: 'Founder', image: '/images/foundergausevarth.jpeg', imageAlt: 'Portrait of Praksh Kumawat, founder of Gau Sevarth' },
+    { name: 'Sushil Kumar', role: 'Founder', image: '/images/founder2gausevarth.jpeg', imageAlt: 'Portrait of Sushil Kumar, founder of Gau Sevarth' },
+  ],
+  heroSlides: [
+    { image: '/images/foundergausevarth.jpeg', alt: 'Foundation founder portrait one', caption: 'Leadership with purpose' },
+    { image: '/images/founder2gausevarth.jpeg', alt: 'Foundation founder portrait two', caption: 'A shared commitment to service' },
+    { image: '/images/gausevarth.logo.jpeg', alt: 'Official foundation logo', caption: 'GAUSEVARATHA SWAYAM SEVAK CHARITABLE FOUNDATION' },
+    { image: '', alt: '', caption: 'Add an approved foundation image here' },
+  ],
+  gallerySlots: [
+    { fileName: 'gallery-01.jpg', alt: 'Describe the approved activity or moment shown' },
+    { fileName: 'gallery-02.jpg', alt: 'Describe the approved activity or moment shown' },
+    { fileName: 'gallery-03.jpg', alt: 'Describe the approved activity or moment shown' },
+    { fileName: 'gallery-04.jpg', alt: 'Describe the approved activity or moment shown' },
+  ],
+  donation: {
+    enabled: false,
+    note: 'Donation instructions will be published after the Foundation confirms an authorised payment method and approves the wording.',
+    paymentUrl: '', // add the Foundation's payment-page link here, then set enabled: true
+    upiId: '',      // e.g. 'name@bank' once the Foundation confirms it; shows a copy-able UPI box
+    amounts: [501, 1100, 2100, 5100],
+    purposes: ['Where needed most', 'Fodder', 'Medical care', 'Shelter'],
+  },
+  objectives: [
+    'Provide green and dry fodder and clean drinking water to the cows in our care, all year round.',
+    'Arrange medical treatment, medicines and recovery time for sick, injured and abandoned cows.',
+    'Offer safe, clean and shaded shelter through the Rajasthan summers and winters.',
+    'Run campaigns such as the Fodder Drive, Cool Water Summer, Winter Warmth and Healing Hands.',
+    'Bring people together through donations, volunteering and awareness about gau seva.',
+    'Keep our records and communication transparent for every donor.',
+  ],
+  initiatives: [],
+  milestones: [
+    {
+      date: '23 February 2024',
+      title: 'Company incorporated',
+      description: 'Incorporated as a Section 8 company under the Companies Act, 2013. This records legal formation, not the start of charitable activities.',
+    },
+  ],
+  impactMetrics: [],
+  stories: [],
+  approvedPhotos: [],
+  documents: [],
+  leadership: [],
+  contact: {
+    email: 'goputrasushil12@gmail.com',
+    phone: '9461778791',
+    whatsapp: '919461778791',
+    publicAddress: 'Bap, Jodhpur, Rajasthan - 342307',
+  },
+}
